@@ -2,9 +2,18 @@
 session_start();
 
 //router
-if (!empty($_GET['page']) && is_file('controler_'.$_GET['page'].'.php'))
-{    
-    include 'controler_'.$_GET['page'].'.php';
+if (!empty($_GET['page']))
+{   
+    $controler_file = 'controler_'.$_GET['page'].'.php';
+    if (file_exists($controler_file))
+    {
+        include $controler_file;
+    }
+    else
+    {
+        include 'controler_404.php';
+    }
+    
 }
 else
 {    
