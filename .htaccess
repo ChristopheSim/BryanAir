@@ -6,6 +6,4 @@ RewriteEngine on
 
 RewriteCond %{HTTP_HOST} ^localhost$
 RewriteCond %{REQUEST_URI} !index.php
-#ignore redect when it's a file
-RewriteCond %{REQUEST_URI} !(\..+)$ [NC]
-RewriteRule ([a-z]+) index.php?page=$1 [L]
+RewriteRule ^([a-z]+)$ index.php?page=$1 [L]
