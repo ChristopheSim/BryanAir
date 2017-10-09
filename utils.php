@@ -18,6 +18,19 @@ EOS;
         </body>
     </html>
 EOS;
-    return $body;
+    return replaceTags($body);
+}
+
+function replaceTags($content)
+{
+    
+    $pattern = '(\$(.+)\$)';
+    
+    while(preg_match($pattern,$content, $matches))
+    {
+        $content = preg_replace($pattern, $matches[1], $content,1);
+    }
+    
+    return  $content;
 }
 ?>
