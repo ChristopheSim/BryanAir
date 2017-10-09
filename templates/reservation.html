@@ -5,7 +5,7 @@
     <p class="title">Destination</p>
         <p>
             <select name="Destination">
-                <option>Chose a destination please</option>
+                <option>The destination</option>
                 <option>Amsterdam</option>
                 <option>Berlin</option>
                 <option>Bruxelles</option>
@@ -17,23 +17,32 @@
         </p>
     <p class="title">Number of passengers</p>
     <p id="number">
-        <input type="radio" name="number" value="1" />1
-        <input type="radio" name="number" value="2" />2
-        <input type="radio" name="number" value="3" />3
-        <input type="radio" name="number" value="4" />4
-        <input type="radio" name="number" value="5" />5
-        <input type="radio" name="number" value="6" />6
-        <input type="radio" name="number" value="7" />7
-        <input type="radio" name="number" value="8" />8
-        <input type="radio" name="number" value="9" />9
-        <input type="radio" name="number" value="10" />10
-        <input type="radio" name="number" value="11" />11
-        <input type="radio" name="number" value="12" />12
-        <input type="radio" name="number" value="13" />13
-        <input type="radio" name="number" value="14" />14
-        <input type="radio" name="number" value="15" />15
+        <select name="Number of passengers">
+            <option>The number of passengers</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+        </select>
     </p>
     <p class="title">Message</p>
-    <fielset id="message">Ecrivez votre message ici...
+    <fielset id="message">
+        <input type=text>
+        </input>
     </fielset>
+    <div class="button">
+        <input type="button" value="Validate" href=/lien>
+        <input type="button" value="Cancel" href=/lien> 
+    </div>
 </form>
