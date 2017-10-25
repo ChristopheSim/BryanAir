@@ -1,7 +1,7 @@
 <div>
    Reserve your mulet
 </div>
-<form method="post" action="detail">
+<form method="post" action="flight">
     <p class="title">Destination</p>
         <p>
             <select name="Destination">
@@ -16,7 +16,7 @@
             </select>
         </p>
     <p class="title">Number of passengers</p>
-    <input type="number" name="NumberOfPassengers">
+    <input type="number" value="1" min="1" name="NumberOfPassengers"> //Max via le compteur de passagers
     <div>Assurance annulation <INPUT type="checkbox" name="nom" value="true">
     </div>
     <div class="button">
