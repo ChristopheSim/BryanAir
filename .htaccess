@@ -1,0 +1,9 @@
+#Forbid file indexes from browser
+Options -Indexes
+
+#Active URL rewrite engine
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^localhost$
+RewriteCond %{REQUEST_URI} !index.php
+RewriteRule ^([a-z]+)$ index.php?page=$1 [L]
