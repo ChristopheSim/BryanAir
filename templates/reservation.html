@@ -1,7 +1,7 @@
 <div>
    Reserve your mulet
 </div>
-<form method="post" action="controler_reservation.php">
+<form method="post" action="detail">
     <p class="title">Destination</p>
         <p>
             <select name="Destination">
@@ -37,12 +37,12 @@
         </select>
     </p>
     <p class="title">Message</p>
-    <fielset id="message">
-        <input type=text>
+    <fielset id="message" >
+        <input type=text name="Message" value="wesh, écrit isi">
         </input>
     </fielset>
     <div class="button">
-        <input type="button" value="Validate" href=/lien>
+        <input type="submit" value="Validate">
         <input type="button" value="Cancel" href=/lien> 
     </div>
 </form>
