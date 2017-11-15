@@ -1,5 +1,6 @@
 <?php
 include "utils.php";
 
-echo buildHTML("home");
+$tags = array("title" => "Home");
+echo buildHTML("home",$tags);
 ?>
