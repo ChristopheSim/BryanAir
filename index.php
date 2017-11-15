@@ -1,4 +1,9 @@
 <?php
+
+require_once("utils.php");
+require_once("Flight.php");
+require_once("Client.php");
+
 session_start();
 
 //router
