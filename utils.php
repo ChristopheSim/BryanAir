@@ -1,5 +1,5 @@
 <?php
-function buildHTML($page_body)
+function buildHTML($page_body, $tags = null)
 {
     $body = <<<EOS
     <!DOCTYPE html>
@@ -18,19 +18,26 @@ EOS;
         </body>
     </html>
 EOS;
-    return replaceTags($body);
+
+    if($tags == null) 
+    {
+        return $body;
+    }
+    else
+    {
+        return replaceTags(buildHTML($page_body),$tags);
+    }
 }
 
-function replaceTags($content)
+
+
+function replaceTags($content, $tags)
 {
-    
-    $pattern = '(\$(.+)\$)';
-    
-    while(preg_match($pattern,$content, $matches))
-    {
-        $content = preg_replace($pattern, $matches[1], $content,1);
-    }
-    
+  
+    $pattern = array_map(function($pat){
+        return '/\$' . $pat . '\$/';
+    },array_keys($tags));     
+    $content = preg_replace($pattern, $tags, $content);
     return  $content;
 }
 ?>
