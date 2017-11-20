@@ -1,6 +1,6 @@
 <?php
 $flight = unserialize($_SESSION["flights"])[$_POST["destination"]];
-print_r($flight);
+$tags = array("title" => "Detail");
 
 if ($flight->getAvailableSeat() >= $_POST["NumberOfPassengers"])
 {
@@ -8,7 +8,11 @@ if ($flight->getAvailableSeat() >= $_POST["NumberOfPassengers"])
     $_SESSION["clients"] = serialize($clients); 
     $_SESSION["reservation"] = array("total_passenger" => $_POST["NumberOfPassengers"], "registerd_passenger" => 0);
 
-    $tags = array("title" => "Detail");
     echo buildHTML("detail", $tags);
+}
+else
+{
+    $tags["leftSeat"] = $flight->getAvailableSeat();
+    echo buildHTML("noSeat" , $tags);
 }
 ?>
