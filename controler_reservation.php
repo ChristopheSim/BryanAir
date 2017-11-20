@@ -15,5 +15,6 @@ $i++;
 
 $tags = array("destinations" => $destinationsHTML);
 $tags["title"] = "Reservation";
+
 echo buildHTML("reservation", $tags);
 ?>
