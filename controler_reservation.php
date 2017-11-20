@@ -12,9 +12,9 @@ foreach($flights as $flight)
 $destinationsHTML .= "<option>";
 $destinationsHTML .= $flight->getDestination();
 $destinationsHTML .= "</option>";
-$destinationsHTML .= "/n";
 }
 
 $tags = array("destinations" => $destinationsHTML);
+$tags["title"] = "Reservation";
 echo buildHTML("reservation", $tags);
 ?>
