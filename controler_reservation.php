@@ -6,12 +6,13 @@ $flights = array($baraki, $torremolinos);
 $_SESSION["flights"] = serialize($flights);
 
 $destinationsHTML = "";
-
+$i = 0;
 foreach($flights as $flight)
 {
-$destinationsHTML .= "<option>";
+$destinationsHTML .= sprintf("<option value= %d>", $i);
 $destinationsHTML .= $flight->getDestination();
 $destinationsHTML .= "</option>";
+$i++;
 }
 
 $tags = array("destinations" => $destinationsHTML);

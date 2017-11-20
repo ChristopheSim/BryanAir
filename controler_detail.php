@@ -1,5 +1,6 @@
 <?php
-$flight = array_filter(unserialize($_SESSION["flights"]),function($flight){return $flight -> getDestination() == $_POST["destination"];})[0];
+$flight = unserialize($_SESSION["flights"])[$_POST["destination"]];
+print_r($flight);
 
 if ($flight->getAvailableSeat() >= $_POST["NumberOfPassengers"])
 {
@@ -10,6 +11,4 @@ if ($flight->getAvailableSeat() >= $_POST["NumberOfPassengers"])
     $tags = array("title" => "Detail");
     echo buildHTML("detail", $tags);
 }
-
-
 ?>
