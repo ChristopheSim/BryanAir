@@ -1,5 +1,4 @@
 <?php
-$restriction = 
 $flight = array_filter(unserialize($_SESSION["flights"]),function($flight){return $flight -> getDestination() == $_POST["destination"];})[0];
 
 if ($flight->getAvailableSeat() >= $_POST["NumberOfPassengers"])
