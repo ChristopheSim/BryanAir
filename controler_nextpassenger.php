@@ -1,6 +1,9 @@
 <?php
-
-$clients = unserialize($_SESSION["clients"]);
+$clients = array();
+if (isset($_SESSION["clients"]))
+{
+    $clients = unserialize($_SESSION["clients"]);
+}
 
 if($_POST["first_name"] == "" || $_POST["last_name"] == "")
 {
