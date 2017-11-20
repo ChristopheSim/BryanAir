@@ -34,7 +34,7 @@
             return $this->flight_number;
         }
 
-        function removeSeat($number_of_seat)
+        function removeSeats($number_of_seat)
         {
             $this->available_seat -= $number_of_seat;
         }
