@@ -1,9 +1,17 @@
 <?php
+switch($_POST["status"])
+{
+    case 0;
+        break;
+    case 1;
+        header("Location: ./");
+        exit();
+        break;
+}
 
 if($_POST["destination"] == "null")
 {
     header('Location: ./reservation');
-    
 }
 
 $flights = unserialize($_SESSION["flights"]);
