@@ -1,7 +1,7 @@
 #pge
 {
     font-family: Verdana, sans-serif;
-    background-color: FF0000;
+    background-color: 000000; /*La couleur en code*/
 }
 header
 {
@@ -11,6 +11,7 @@ home
 {
     font-size: xx-large;
     font-style: italic;
+    text-align: center;
 }
 note
 {
