@@ -1,6 +1,25 @@
+div
+{
+    font-family: Verdana, sans-serif;
+    background-color: FF0000;
+}
 header
 {
-    display:block; width:100%; margin:0; padding:7px; background:rgba(25, 0, 255, 0.486)
+    display:block; width:100%; margin:0; padding:7px; background:rgb(73, 73, 73);
+}
+home
+{
+    font-size: xx-large;
+    font-style: italic;
+}
+note
+{
+    font-size: small;
+    text-align: center;
+}
+a
+{
+    font-variant: small-caps;
 }
 .dspn
 {
