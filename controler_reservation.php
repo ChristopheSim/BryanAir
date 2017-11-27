@@ -19,9 +19,9 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
 
     $destinationsHTML = "";
-    while($flight = mysqli_fetch_assoc($result)) {
-        $destinationsHTML .= sprintf("<option value= %s>", $flight["IATA"]);
-        $destinationsHTML .= sprintf("%s - (%s)", $flight["name"], $flight["IATA"]);
+    while($airport = mysqli_fetch_assoc($result)) {
+        $destinationsHTML .= sprintf("<option value= %s>", $airport["IATA"]);
+        $destinationsHTML .= sprintf("%s - (%s)", $airport["name"], $airport["IATA"]);
         $destinationsHTML .= "</option>";
     }
 } else {
