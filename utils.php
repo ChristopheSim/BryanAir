@@ -1,4 +1,10 @@
 <?php
+//DB indentifier
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "BryanAir";
+
 function buildHTML($page_body, $tags = null)
 {
     $body = <<<EOS
