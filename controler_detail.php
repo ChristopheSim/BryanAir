@@ -12,6 +12,7 @@ switch($_POST["status"])
 if($_POST["destination"] == "null")
 {
     header('Location: ./reservation');
+    exit();
 }
 
 $flights = unserialize($_SESSION["flights"]);
