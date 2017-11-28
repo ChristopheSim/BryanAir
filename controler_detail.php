@@ -24,7 +24,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = Sprintf( "SELECT seats, departure FROM flights WHERE departure ='CRL' && arrival = '%s' ", $_POST["destination"]);
+$sql = Sprintf( "SELECT seats, number FROM flights WHERE departure ='CRL' && arrival = '%s' ", $_POST["destination"]);
 $result = mysqli_query($conn, $sql);
 $flight;
 
@@ -42,7 +42,7 @@ mysqli_close($conn);
 if ($flight["seats"] >= $_POST["NumberOfPassengers"])
 {
     $_SESSION["reservation"] = array("total_passenger" => $_POST["NumberOfPassengers"], "registerd_passenger" => 0, "destination" => $_POST["destination"]);
-
+    $_SESSION["flight"] = $flight["number"];
     echo buildHTML("detail", $tags);
 }
 else

@@ -10,6 +10,7 @@ if(isset($_SESSION["Destination"]))
     
 }
 
+session_unset();
 $tags = array("title" => "Home");
 echo buildHTML("home",$tags);
 
