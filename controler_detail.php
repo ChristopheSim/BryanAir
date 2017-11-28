@@ -37,9 +37,20 @@ if (mysqli_num_rows($result) > 0) {
     echo "0 results";
 }
 
+$sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $flight["number"]);
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        $av_seats = $flight["seats"] - $row["taken_seats"];
+    }
+} else {
+    echo "0 results";
+}
+
 mysqli_close($conn);
 
-if ($flight["seats"] >= $_POST["NumberOfPassengers"])
+if ($av_seats >= $_POST["NumberOfPassengers"])
 {
     $_SESSION["reservation"] = array("total_passenger" => $_POST["NumberOfPassengers"], "registerd_passenger" => 0, "destination" => $_POST["destination"]);
     $_SESSION["flight"] = $flight["number"];
@@ -47,7 +58,7 @@ if ($flight["seats"] >= $_POST["NumberOfPassengers"])
 }
 else
 {
-    $tags["leftSeat"] = $flight->getAvailableSeat();
+    $tags["leftSeat"] = $av_seats;
     echo buildHTML("noSeat" , $tags);
 }
 ?>
