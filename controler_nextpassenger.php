@@ -34,6 +34,7 @@ $_SESSION["reservation"]["registerd_passenger"]++;
 if($_SESSION["reservation"]["registerd_passenger"] >= $_SESSION["reservation"]["total_passenger"]) 
 {
     echo buildHTML("confirmation");
+    $_SESSION["status"] = 3;
 }
 else
 {

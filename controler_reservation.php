@@ -27,6 +27,6 @@ mysqli_close($conn);
 
 $tags = array("destinations" => $destinationsHTML);
 $tags["title"] = "Reservation";
-
+$_SESSION["status"] = 1;
 echo buildHTML("reservation", $tags);
 ?>
