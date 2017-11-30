@@ -15,6 +15,12 @@ if($_POST["destination"] == "null")
     exit();
 }
 
+if($_SESSION["status"] != 1)
+{
+    header('Location: ./');
+    exit();
+}
+
 $tags = array("title" => "Detail");
 
 // Create connection
