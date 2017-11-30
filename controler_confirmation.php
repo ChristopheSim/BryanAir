@@ -1,4 +1,9 @@
 <?php
+    if($_SESSION["status"] != 3)
+    {
+        header('Location: ./');
+        exit();
+    }
    $clients = unserialize($_SESSION["clients"]);
    if($_POST["confirm"] == "true")
     {
