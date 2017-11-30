@@ -19,6 +19,11 @@ if (isset($_SESSION["clients"]))
     $clients = unserialize($_SESSION["clients"]);
 }
 
+if($_SESSION["status"] != 2)
+{
+    header('Location: ./');
+    exit();
+}
 
 if($_POST["first_name"] == "" || $_POST["last_name"] == "")
 {
