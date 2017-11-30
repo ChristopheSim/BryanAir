@@ -33,18 +33,19 @@ if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) {
         $flight = $row;
     }
-} else {
+} 
+else {
     echo "0 results";
 }
 
 $sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $flight["number"]);
 $result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        $av_seats = $flight["seats"] - $row["taken_seats"];
-    }
-} else {
+if (mysqli_num_rows($result) > 0) 
+{
+    $av_seats = $flight["seats"] - mysqli_fetch_assoc($result)["taken_seats"];
+} 
+else 
+{
     echo "0 results";
 }
 
