@@ -19,6 +19,11 @@ if (isset($_SESSION["clients"]))
     $clients = unserialize($_SESSION["clients"]);
 }
 
+if($_SESSION["status"] != 2)
+{
+    header('Location: ./');
+    exit();
+}
 
 if($_POST["first_name"] == "" || $_POST["last_name"] == "")
 {
@@ -34,6 +39,7 @@ $_SESSION["reservation"]["registerd_passenger"]++;
 if($_SESSION["reservation"]["registerd_passenger"] >= $_SESSION["reservation"]["total_passenger"]) 
 {
     echo buildHTML("confirmation");
+    $_SESSION["status"] = 3;
 }
 else
 {

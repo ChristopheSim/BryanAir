@@ -23,6 +23,15 @@
             $this->first_name = $first_name; 
         }
 
+        function getLastName()
+        {
+            return $this->last_name;
+        }
+        function getFirstName()
+        {
+            return $this->first_name;
+        }
+
         function setAge($age)
         {
             $this->age = $age;
