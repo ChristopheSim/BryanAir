@@ -21,7 +21,7 @@
    if(!$maj)
    {
        echo "NEED ONE OVER 18";
-       $_SESSION["status"] = "ageError"
+       $_SESSION["status"] = "ageError";
        exit();
    }
 
@@ -39,15 +39,16 @@
 
         // add client in DB
         $stmt = mysqli_stmt_init($conn);
-        if (mysqli_stmt_prepare($stmt, 'INSERT INTO clients (first_name, last_name, email)
-                                        VALUES (?, ?, ?)')) {
+        if (mysqli_stmt_prepare($stmt, 'INSERT INTO clients (first_name, last_name, email, age)
+                                        VALUES (?, ?, ?, ?)')) {
             foreach($clients as $client)
             {
                 $first_name = $client->getFirstName();
                 $last_name = $client->getLastName();
+                $age = $client->getAge();
                 
                     /* Association des variables SQL */
-                    mysqli_stmt_bind_param($stmt, "sss", $first_name,$last_name, $_SESSION["email"]);
+                    mysqli_stmt_bind_param($stmt, "ssss", $first_name,$last_name, $_SESSION["email"], $age);
                 
                     /* Exécution de la requête */
                 if (mysqli_stmt_execute($stmt)) {
