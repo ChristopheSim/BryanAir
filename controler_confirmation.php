@@ -4,7 +4,27 @@
         header('Location: ./');
         exit();
     }
+
    $clients = unserialize($_SESSION["clients"]);
+
+   //check for one client at least 18 YO
+   $maj = false;
+   foreach($clients as $client)
+   {
+        if($client->getAge() >= 18)
+        {
+            $maj = true;
+            break;
+        }
+   }
+
+   if(!$maj)
+   {
+       echo "NEED ONE OVER 18";
+       $_SESSION["status"] = "ageError"
+       exit();
+   }
+
    if($_POST["confirm"] == "true")
     {
         // Create connection
