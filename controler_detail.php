@@ -79,6 +79,7 @@ if ($av_seats >= $_POST["NumberOfPassengers"])
     $_SESSION["reservation"] = array("total_passenger" => $_POST["NumberOfPassengers"], "registerd_passenger" => 0, "arrival" => $_POST["arrival"]);
     $_SESSION["flight"] = $flight["number"];
     $_SESSION["return"] = $return_flight["number"];
+    $_SESSION["email"] = $_POST["email"];
     echo buildHTML("detail", $tags);
     $_SESSION["status"] = 2;
 }
