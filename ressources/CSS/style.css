@@ -1,6 +1,16 @@
-#pge
+#nav-bar
 {
-    display:block;width:700px;margin:20px auto;padding:7px;background:#666
+    background-color :#073590;
+    border-bottom-width : 3px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(241, 201, 51);
+    height: 68px;
+
+}
+#logo
+{
+    height: 75%;
+    margin-top: 7px;
 }
 .dspn
 {
@@ -15,5 +25,10 @@ title
 object #document path
 {
     fill: red;
+}
+
+.carousel
+{
+    width: 800px
 }
 
