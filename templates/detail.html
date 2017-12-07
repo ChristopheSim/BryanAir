@@ -1,25 +1,27 @@
-<div>
-    <h1>Passengers'details</h1> 
-</div>
-<div class="container rounded blue-box">
-    <form method="post" action="nextpassenger">
-        <div class="form-group">
-            <label class="taxt-white">First Name</label>
-            <input type="text" class="form-control"  name="first_name">
-        </div>
-        <div class="form-group">
-            <label >Last Name</label>
-            <input type="text" class="form-control"  name="last_name">
-        </div>
-        <div class="form-group">
-            <label >Age</label>
-            <input type="number" class="form-control" value="1" min="1" name="age">
-        </div>
-    
-        <div class="button" >
-            <button type="submit" class="btn btn-warning" name="status" value="2">Cancel the reservation</button>
-            <button type="submit" class="btn btn-warning" name="status" value="1" >Previous page</button>
-            <button type="submit" class="btn btn-warning" name="status" value="0">Next Step</button>
-        </div>
-    </form>
+<div class="container-fluid">
+    <div>
+        <h1>Passengers'details</h1> 
+    </div>
+    <div class="container rounded blue-box">
+        <form method="post" action="nextpassenger">
+            <div class="form-group">
+                <label class="taxt-white">First Name</label>
+                <input type="text" class="form-control"  name="first_name">
+            </div>
+            <div class="form-group">
+                <label >Last Name</label>
+                <input type="text" class="form-control"  name="last_name">
+            </div>
+            <div class="form-group">
+                <label >Age</label>
+                <input type="number" class="form-control" value="1" min="1" name="age">
+            </div>
+        
+            <div class="button" >
+                <button type="submit" class="btn btn-warning" name="status" value="2">Cancel the reservation</button>
+                <button type="submit" class="btn btn-warning" name="status" value="1" >Previous page</button>
+                <button type="submit" class="btn btn-warning" name="status" value="0">Next Step</button>
+            </div>
+        </form>
+    </div>
 </div>

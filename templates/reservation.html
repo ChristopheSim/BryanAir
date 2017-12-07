@@ -1,64 +1,66 @@
-<div>
-   <h1>Reserve your mulet</h1> 
-</div>
-
-<div class="container rounded blue-box" >
-    <form class="container rounded" method="post" action="detail">
-        <div class="form-check form-check-inline">
-            <label class="form-check-label text-white">
-                <input class="form-check-input" type="radio" name="return" value="true" checked>
-                <span class="checkmark"></span>
-                Return
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label text-white">
-                <input class="form-check-input" type="radio" name="return"  value="false">
-                <span class="checkmark"></span>
-                One way 
-            </label>
-        </div>
-        <div class="form-group">
-               
-            <label class="text-white " > <i class="fa fa-paper-plane" aria-hidden="true"></i> Flights </label>
-            <div class="form-row">
-                <div class="col-auto">
-                        <select class="custom-select" name="departure">
-                            <option selected>Departure</option>
-                            $destinations$
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <select class="custom-select" name="arrival">
-                            <option selected>Arrival</option>
-                            $destinations$
-                        </select>
-                </div>
-            </div>
-            
-        </div>
+<div class="container-fluid">
+    <div>
+       <h1>Book your mulet</h1> 
+    </div>
     
-        <div class="form-group">
-            <label class="text-white"><i class="fa fa-user" aria-hidden="true"></i> Number of passengers</label>
-            <input type="number" class="form-control" min="1" Value="1" name="NumberOfPassengers">
-        </div>
-    
-        <div class="form-group">
-            <label class="text-white"><i class="fa fa-envelope" aria-hidden="true"></i> Email address</label>
-            <input type="email" class="form-control" placeholder="name@example.com" name="email">
-        </div>
-    
-        <div class="form-check">     
+    <div class="container rounded blue-box" >
+        <form class="container rounded" method="post" action="detail">
+            <div class="form-check form-check-inline">
                 <label class="form-check-label text-white">
-                    <input class="form-check-input" type="checkbox" name="inssurance" value="">
-                    <span class="toggle"></span>
-                    Assurance annulation
+                    <input class="form-check-input" type="radio" name="return" value="true" checked>
+                    <span class="checkmark"></span>
+                    Return
                 </label>
             </div>
-    
-        <div class="button">
-            <button type="submit" name="status" value="1" class="btn btn-warning">Cancel the reservation</button> 
-            <button type="submit" name="status" value="0" class="btn btn-warning" >Next step</button>
-        </div>
-    </form>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label text-white">
+                    <input class="form-check-input" type="radio" name="return"  value="false">
+                    <span class="checkmark"></span>
+                    One way 
+                </label>
+            </div>
+            <div class="form-group">
+                   
+                <label class="text-white " > <i class="fa fa-paper-plane" aria-hidden="true"></i> Flights </label>
+                <div class="form-row">
+                    <div class="col-auto">
+                            <select class="custom-select" name="departure">
+                                <option selected>Departure</option>
+                                $destinations$
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select class="custom-select" name="arrival">
+                                <option selected>Arrival</option>
+                                $destinations$
+                            </select>
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="form-group">
+                <label class="text-white"><i class="fa fa-user" aria-hidden="true"></i> Number of passengers</label>
+                <input type="number" class="form-control" min="1" Value="1" name="NumberOfPassengers">
+            </div>
+        
+            <div class="form-group">
+                <label class="text-white"><i class="fa fa-envelope" aria-hidden="true"></i> Email address</label>
+                <input type="email" class="form-control" placeholder="name@example.com" name="email">
+            </div>
+        
+            <div class="form-check">     
+                    <label class="form-check-label text-white">
+                        <input class="form-check-input" type="checkbox" name="inssurance" value="">
+                        <span class="toggle"></span>
+                        Assurance annulation
+                    </label>
+                </div>
+        
+            <div class="button">
+                <button type="submit" name="status" value="1" class="btn btn-warning">Cancel the reservation</button> 
+                <button type="submit" name="status" value="0" class="btn btn-warning" >Next step</button>
+            </div>
+        </form>
+    </div>
 </div>
