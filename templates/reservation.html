@@ -1,27 +1,67 @@
-<div>
-   <home>Reserve your mulet</home>
-</div>
-<form method="post" action="detail">
-    <p class="title">Destination</p>
-        <p>
-            <select name="departure">
-                <option selected="selected" value = null >Departure</option>
-                $destinations$
-            </select>
-            <select name="arrival">
-                <option selected="selected" value = null >Arrival</option>
-                $destinations$
-            </select>
-        </p>
-    <p class="title">Number of passengers</p>
-    <input type="number" value="1" min="1" name="NumberOfPassengers">
 
-    <div><input type="texte" value="jon@example.com" name="email"></div>
-    <div>Return <input type="checkbox" name="return" value="true">
-    Assurance annulation <input type="checkbox" name="nom" value="true">
+<div class="container-fluid">
+    <div>
+       <h1>Book your mulet</h1> 
     </div>
-    <div class="button">
-        <button type="submit" name="status" value="0" >Next step</button>
-        <button type="submit" name="status" value="1" >Cancel the reservation</button> 
+    <div class="container rounded blue-box" >
+        <form class="container rounded" method="post" action="detail" >
+            <div class="form-check form-check-inline">
+                <label class="form-check-label text-white">
+                    <input class="form-check-input" type="radio" name="return" value="true" checked>
+                    <span class="checkmark"></span>
+                    Return
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label text-white">
+                    <input class="form-check-input" type="radio" name="return"  value="false">
+                    <span class="checkmark"></span>
+                    One way 
+                </label>
+            </div>
+            <div class="form-group">
+                   
+                <label class="text-white " > <i class="fa fa-paper-plane res-icon" aria-hidden="true"></i> Flights </label>
+                <div class="form-row">
+                    <div class="col-auto">
+                            <select class="custom-select form-control" name="departure" required>
+                                <option selected value="">Departure</option>
+                                $destinations$
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <select class="custom-select form-control" name="arrival" required>
+                                <option selected value="">Arrival</option>
+                                $destinations$
+                            </select>
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="form-group">
+                <label class="text-white"><i class="fa fa-user res-icon" aria-hidden="true"></i> Number of passengers</label>
+                <input type="number" class="form-control" min="1" Value="1" name="NumberOfPassengers" required>
+            </div>
+        
+            <div class="form-group">
+                <label class="text-white"><i class="fa fa-envelope res-icon" aria-hidden="true"></i> Email address</label>
+                <input type="email" class="form-control" placeholder="name@example.com" name="email" required>
+            </div>
+        
+            <div class="form-check">     
+                    <label class="form-check-label text-white">
+                        <input class="form-check-input" type="checkbox" name="inssurance" value="">
+                        <span class="toggle"></span>
+
+                        Assurance annulation
+                    </label>
+                </div>
+        
+            <div class="button">
+                <a href="/BryanAir" class="btn btn-warning">Cancel the reservation</a> 
+                <button type="submit" class="btn btn-warning" >Next step</button>
+            </div>
+        </form>
     </div>
-</form>
+</div>

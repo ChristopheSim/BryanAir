@@ -1,13 +1,18 @@
-<div>
-    <home>Confirmation</home>
-    <BR CLEAR="all">
-    <note>Please confirme your reservation</note>
-    <BR CLEAR="all">
-    // faire apparaitre un tableau qui va rerendre toutes les infos
-    // attention que quelqu'il peut y avoir pluiseurs destinantions avant paiement
-    // vérifier qu'au moins un des passagers est majeur
-    <form  method="post" action="confirmation">
-        <button type="submit" name="confirm" value=true>Confirm</button>
-        <button type="submit" name="confirm" value=false>Cancel</button>
-    </form>
+<div class="container-fluid">
+    <div>
+        <h1>Confirmation</h1> 
+    </div>
+    <div class="container rounded blue-box">
+        <form method="post" action="confirmation">
+            <label class="text-white">Please confirme your reservation</label>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-success" name="confirm" value=true>
+                    <i class="fa fa-check" aria-hidden="true"></i> Confirm
+                </button>
+                <button type="submit" class="btn btn-danger" name="confirm" value=false>
+                    <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
