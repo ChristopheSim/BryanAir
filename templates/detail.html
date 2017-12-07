@@ -3,18 +3,18 @@
         <h1>Passengers'details</h1> 
     </div>
     <div class="container rounded blue-box">
-        <form method="post" action="nextpassenger">
+        <form method="post" action="nextpassenger" >
             <div class="form-group">
                 <label class="taxt-white">First Name</label>
-                <input type="text" class="form-control"  name="first_name">
+                <input type="text" class="form-control"  name="first_name" required>
             </div>
             <div class="form-group">
                 <label >Last Name</label>
-                <input type="text" class="form-control"  name="last_name">
+                <input type="text" class="form-control"  name="last_name" required>
             </div>
             <div class="form-group">
                 <label >Age</label>
-                <input type="number" class="form-control" value="1" min="1" name="age">
+                <input type="number" class="form-control" value="1" min="1" max="150" name="age" required>
             </div>
         
             <div class="button" >
