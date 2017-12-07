@@ -1,6 +1,26 @@
 #pge
 {
-    display:block;width:700px;margin:20px auto;padding:7px;background:#666
+    font-family: Verdana, sans-serif;
+    background-color: 000000; /*La couleur en code*/
+}
+header
+{
+    display:block; width:100%; margin:0; padding:7px; background:rgb(73, 73, 73);
+}
+home
+{
+    font-size: xx-large;
+    font-style: italic;
+    text-align: center;
+}
+note
+{
+    font-size: small;
+    text-align: center;
+}
+a
+{
+    font-variant: small-caps;
 }
 .dspn
 {
