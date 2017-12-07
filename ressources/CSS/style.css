@@ -66,7 +66,7 @@ object #document path
     background-color: transparent;
     border-radius: 50%;
     border: 1.5px solid white;
-    margin-top: 5px;
+    margin-top: 1px;
     
 }
 
@@ -92,7 +92,7 @@ object #document path
 	background: rgb(241, 201, 51);
 }
 
-.fa
+.res-icon
 {
     color:rgb(241, 201, 51);
 }
@@ -102,13 +102,12 @@ object #document path
     position: relative;
     height: 15px;
     width: 30px;
-    background-color: #578fbb;
+    background-color: hsla(206, 63%, 41%, 1);
     border-radius: 7.5px;
-    border: 0.5px solid white;
-    margin-top: 5px;
+    margin-top: -3px;
     display: inline-block;
     margin-left: -7px;
-    margin-right: 10px;
+    margin-right: 18px;
 }
 
 /* Style the indicator (dot/circle) */
@@ -120,7 +119,7 @@ object #document path
 	width: 21px;
 	height: 21px;
 	border-radius: 50%;
-    background-color: rgba(241, 201, 51,0.5);
+    background-color: hsla(206, 78%, 62%, 1);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -135,5 +134,15 @@ object #document path
 {
     background-color: rgb(241, 201, 51);
     color:#073590;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 5px 11px;
+    margin-right: 5px;
+}
+
+label
+{
+    font-weight: 700;
+    font-size: 12px;
 }
 
