@@ -1,12 +1,14 @@
-<div>
-    <h1>Confirmation</h1> 
-</div>
-<div>
-    <form method="post" action="confirmation">
-        <label>Please confirme your reservation</label>
-        <div class="button">
-            <button type="submit" class="btn btn-primary" name="confirm" value=true>Confirm</button>
-            <button type="submit" class="btn btn-primary" name="confirm" value=false>Cancel</button>
-        </div>
-    </form>
+<div class="container-fluid">
+    <div>
+        <h1>Confirmation</h1> 
+    </div>
+    <div class="container rounded blue-box">
+        <form method="post" action="confirmation">
+            <label class="text-white">Please confirme your reservation</label>
+            <div class="container mx-auto">
+                <button type="submit" class="btn btn-success" name="confirm" value=true>Confirm</button>
+                <button type="submit" class="btn btn-danger" name="confirm" value=false>Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>
