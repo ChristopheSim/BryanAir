@@ -5,6 +5,8 @@
         exit();
     }
 
+    if(empty($_POST["confirm"]) || !($_POST["confirm"]=="true" && $_POST["confirm"]=="false"))
+
    $clients = unserialize($_SESSION["clients"]);
 
    //check for one client at least 18 YO
