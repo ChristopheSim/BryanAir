@@ -24,7 +24,7 @@ if(empty($_POST["email"]))
     exit();
 }
 
-if($_SESSION["status"] != 1)
+if($_SESSION["status"]) || $_SESSION["status"] != 1)
 {
     header('Location: ./');
     exit();

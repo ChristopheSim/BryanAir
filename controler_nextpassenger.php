@@ -24,7 +24,7 @@ if (isset($_SESSION["clients"]))
     $clients = unserialize($_SESSION["clients"]);
 }
 
-if($_SESSION["status"] != 2)
+if($_SESSION["status"]) || $_SESSION["status"] != 2)
 {
     header('Location: ./');
     exit();

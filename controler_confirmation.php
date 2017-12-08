@@ -1,5 +1,5 @@
 <?php
-    if($_SESSION["status"] != 3)
+    if(empty($_SESSION["status"]) || $_SESSION["status"] != 3)
     {
         header('Location: ./');
         exit();
