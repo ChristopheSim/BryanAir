@@ -1,6 +1,6 @@
 <?php
 
-if($_SESSION["status"]) || $_SESSION["status"] != 1)
+if(empty($_SESSION["status"]) || $_SESSION["status"] != 1)
 {
     header('Location: ./');
     exit();
