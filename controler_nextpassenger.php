@@ -1,17 +1,22 @@
 <?php
 $clients = array();
-switch($_POST["status"])
+
+if(empty($_POST["first_name"]))
 {
-    case 0;
-        break;
-    case 1;
-        header("Location: ./reservation");
-        exit();
-        break;
-    case 2;
-        header("Location: ./");
-        exit();
-        break;
+    echo "first_name not set";
+    exit();
+}
+
+if(empty($_POST["last_name"]))
+{
+    echo "last_name not set";
+    exit();
+}
+
+if(empty($_POST["age"]) || !ctype_digit($_POST["age"]))
+{
+    echo "age not set or not int";
+    exit();
 }
 
 if (isset($_SESSION["clients"]))
