@@ -1,17 +1,26 @@
 <?php
-switch($_POST["status"])
+
+if(empty($_POST["arrival"]))
 {
-    case 0;
-        break;
-    case 1;
-        header("Location: ./");
-        exit();
-        break;
+    echo "arrival not set or not string";
+    exit();
 }
 
-if($_POST["arrival"] == "null")
+if(empty($_POST["departure"]))
 {
-    header('Location: ./reservation');
+    echo "departire not set";
+    exit();
+}
+
+if(empty($_POST["passengers_nb"]) || !ctype_digit($_POST["passengers_nb"]))
+{
+    echo "passengers_nb not set or not int";
+    exit();
+}
+
+if(empty($_POST["email"]))
+{
+    echo "email not set";
     exit();
 }
 
@@ -21,71 +30,93 @@ if($_SESSION["status"] != 1)
     exit();
 }
 
+
 $tags = array("title" => "Detail");
 
-// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
+
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// get outbound flight data
 $sql = Sprintf( "SELECT seats, number FROM flights WHERE departure ='%s' && arrival = '%s' ", $_POST["departure"], $_POST["arrival"]);
 $result = mysqli_query($conn, $sql);
 $flight;
 
 if (mysqli_num_rows($result) > 0) {
-    // output data of each row
+    
     $flight = mysqli_fetch_assoc($result);
+
+    // count number of taken seat for outbound
+    $sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $flight["number"]);
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) 
+    {
+        $av_seats = $flight["seats"] - mysqli_fetch_assoc($result)["taken_seats"];
+    } 
+    else 
+    {
+        echo "0 results";
+        exit();
+    }
 } 
 else {
     echo "0 results";
     exit();
 }
 
+// get return flight data
 $return_flight["number"] = null;
-if(isset($_POST["return"]) &&  $_POST["return"] == "true")
+if(isset($_POST["return"]) == "true")
 {
     $sql = Sprintf( "SELECT seats, number FROM flights WHERE departure ='%s' && arrival = '%s' ", $_POST["arrival"], $_POST["departure"]);
     $result = mysqli_query($conn, $sql);
     $flight;
-    if (mysqli_num_rows($result) > 0) {
-        // output data of each row
+    if (mysqli_num_rows($result) > 0) 
+    {
         $return_flight = mysqli_fetch_assoc($result);
+        // count number of taken seat for outbound
+        $sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $flight["number"]);
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) 
+        {
+            $av_seats_return = $flight["seats"] - mysqli_fetch_assoc($result)["taken_seats"];
+        } 
+        else 
+        {
+            echo "0 results";
+            exit();
+        }
     } 
-    else {
+    else 
+    {
         echo "0 results";
         exit();
     }
 }
 
-
-$sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $flight["number"]);
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) 
-{
-    $av_seats = $flight["seats"] - mysqli_fetch_assoc($result)["taken_seats"];
-} 
-else 
-{
-    echo "0 results";
-    exit();
-}
-
 mysqli_close($conn);
 
-if ($av_seats >= $_POST["NumberOfPassengers"])
-{
-    $_SESSION["reservation"] = array("total_passenger" => $_POST["NumberOfPassengers"], "registerd_passenger" => 0, "arrival" => $_POST["arrival"]);
-    $_SESSION["flight"] = $flight["number"];
-    $_SESSION["return"] = $return_flight["number"];
-    $_SESSION["email"] = $_POST["email"];
-    echo buildHTML("detail", $tags);
-    $_SESSION["status"] = 2;
-}
-else
+if($av_seats < $_POST["passengers_nb"])
 {
     $tags["leftSeat"] = $av_seats;
     echo buildHTML("noSeat" , $tags);
+    exit();
 }
+
+if($av_seats < $_POST["passengers_nb"])
+{
+    $tags["leftSeat"] = $av_seats;
+    echo buildHTML("noSeat" , $tags);
+    exit();
+}
+
+$_SESSION["reservation"] = array("total_passenger" => $_POST["passengers_nb"], "registerd_passenger" => 0, "arrival" => $_POST["arrival"]);
+$_SESSION["flight"] = $flight["number"];
+$_SESSION["return"] = $return_flight["number"];
+$_SESSION["email"] = $_POST["email"];
+echo buildHTML("detail", $tags);
+$_SESSION["status"] = 2;
+
 ?>
