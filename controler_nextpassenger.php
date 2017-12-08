@@ -1,7 +1,7 @@
 <?php
 $clients = array();
 
-if($_SESSION["status"]) || $_SESSION["status"] != 2)
+if(empty($_SESSION["status"]) || $_SESSION["status"] != 2)
 {
     header('Location: ./');
     exit();
