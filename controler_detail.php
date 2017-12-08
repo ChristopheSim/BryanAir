@@ -1,5 +1,11 @@
 <?php
 
+if($_SESSION["status"]) || $_SESSION["status"] != 1)
+{
+    header('Location: ./');
+    exit();
+}
+
 if(empty($_POST["arrival"]))
 {
     echo "arrival not set or not string";
@@ -23,13 +29,6 @@ if(empty($_POST["email"]))
     echo "email not set";
     exit();
 }
-
-if($_SESSION["status"]) || $_SESSION["status"] != 1)
-{
-    header('Location: ./');
-    exit();
-}
-
 
 $tags = array("title" => "Detail");
 

@@ -1,6 +1,12 @@
 <?php
 $clients = array();
 
+if($_SESSION["status"]) || $_SESSION["status"] != 2)
+{
+    header('Location: ./');
+    exit();
+}
+
 if(empty($_POST["first_name"]))
 {
     echo "first_name not set";
@@ -22,12 +28,6 @@ if(empty($_POST["age"]) || !ctype_digit($_POST["age"]))
 if (isset($_SESSION["clients"]))
 {
     $clients = unserialize($_SESSION["clients"]);
-}
-
-if($_SESSION["status"]) || $_SESSION["status"] != 2)
-{
-    header('Location: ./');
-    exit();
 }
 
 if($_POST["first_name"] == "" || $_POST["last_name"] == "")
