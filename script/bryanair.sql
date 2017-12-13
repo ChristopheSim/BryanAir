@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 30 nov. 2017 à 07:59
+-- Généré le :  mer. 13 déc. 2017 à 10:32
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -56,8 +56,9 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `age` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -94,13 +95,12 @@ INSERT INTO `flights` (`number`, `departure`, `arrival`, `seats`) VALUES
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `client` int(6) UNSIGNED NOT NULL,
   `flight` int(4) UNSIGNED NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `client` (`client`),
+  `inssurance` tinyint(1) NOT NULL,
+  PRIMARY KEY (`client`,`flight`),
   KEY `flight` (`flight`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contraintes pour les tables déchargées
@@ -117,7 +117,7 @@ ALTER TABLE `flights`
 -- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `client` FOREIGN KEY (`client`) REFERENCES `clients` (`ID`),
+  ADD CONSTRAINT `client` FOREIGN KEY (`client`) REFERENCES `clients` (`ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `flight` FOREIGN KEY (`flight`) REFERENCES `flights` (`number`);
 COMMIT;
 
