@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) > 0) {
     $flight = mysqli_fetch_assoc($result);
     $obFlight = new Flight($_POST["departure"], $_POST["arrival"], $flight["number"], $flight["seats"]);
     // count number of taken seat for outbound
-    $sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $obFlight->getNumber());
+    $sql = sprintf("SELECT COUNT(client) AS taken_seats FROM reservation WHERE flight = '%s'", $obFlight->getNumber());
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) 
     {
@@ -57,7 +57,7 @@ if (mysqli_num_rows($result) > 0) {
     else 
     {
         $_SESSION['error'] = '0 results';
-        header('Location: /reservation');
+        header('Location: BryanAir/reservation');
         die();
     }
 } 
@@ -80,7 +80,7 @@ if(isset($_POST["return"]) == "true")
         $return_flight = mysqli_fetch_assoc($result);
         $rFlight = new Flight($_POST["arrival"], $_POST["departure"], $return_flight["number"], $return_flight["seats"]);
         // count number of taken seat for outbound
-        $sql = sprintf("SELECT COUNT(ID) AS taken_seats FROM reservation WHERE flight = '%s'", $rFlight->getNumber());
+        $sql = sprintf("SELECT COUNT(client) AS taken_seats FROM reservation WHERE flight = '%s'", $rFlight->getNumber());
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) 
         {
@@ -88,15 +88,15 @@ if(isset($_POST["return"]) == "true")
         } 
         else 
         {
-            $_SESSION['error'] = '0 results';
-            header('Location: /reservation');
+            $_SESSION['error'] = '0 results'; 
+            header('Location: BryanAir/reservation');
             die();
         }
     } 
     else 
     {
         $_SESSION['error'] = '0 results';
-        header('Location: /reservation');
+        header('Location: BryanAir/reservation');
         die();
     }
 }

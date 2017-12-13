@@ -68,13 +68,14 @@
 
         //add reservation in DB
         $stmt = mysqli_stmt_init($conn);
-        if (mysqli_stmt_prepare($stmt, 'INSERT INTO reservation (client, flight)
-                                        VALUES (?,?)')) {
+        if (mysqli_stmt_prepare($stmt, 'INSERT INTO reservation (client, flight, inssurance)
+                                        VALUES (?,?,?)')) {
             foreach($ids as $id)
             {                
                     /* Association des variables SQL */
                     $flight_number = $reservation->getOBFlight()->getNumber();
-                    mysqli_stmt_bind_param($stmt, "ss", $id ,$flight_number);
+                    $inssurance = $reservation->getInssurance();
+                    mysqli_stmt_bind_param($stmt, "sss", $id ,$flight_number, $inssurance);
                 
                     /* Exécution de la requête */
                 if (mysqli_stmt_execute($stmt)) {
@@ -92,12 +93,13 @@
         {
             $stmt = mysqli_stmt_init($conn);
             if (mysqli_stmt_prepare($stmt, 'INSERT INTO reservation (client, flight)
-                                            VALUES (?,?)')) {
+                                            VALUES (?,?,?)')) {
                 foreach($ids as $id)
                 {                  
                         /* Association des variables SQL */
                         $flight_number = $return_flight->getNumber();
-                        mysqli_stmt_bind_param($stmt, "ss", $id ,$flight_number);
+                        $inssurance = $reservation->getInssurance();
+                        mysqli_stmt_bind_param($stmt, "sss", $id ,$flight_number, $inssurance);
                     
                         /* Exécution de la requête */
                     if (mysqli_stmt_execute($stmt)) {
