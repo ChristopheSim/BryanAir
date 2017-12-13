@@ -37,13 +37,14 @@ if($_POST["first_name"] == "" || $_POST["last_name"] == "")
     exit();
 }
 
-array_push($clients, new Client($_POST["first_name"], $_POST["last_name"],$_POST["age"]));
-$_SESSION["clients"] = serialize($clients);
-$_SESSION["reservation"]["registerd_passenger"]++; 
+$reservation = unserialize($_SESSION["reservation"]);
 
-if($_SESSION["reservation"]["registerd_passenger"] >= $_SESSION["reservation"]["total_passenger"]) 
+$reservation->addClient(new Client($_POST["first_name"], $_POST["last_name"],$_POST["age"]));
+
+if($reservation->getRegisterdPassenger() >= $reservation->getTotalPassenger()) 
 {
     echo buildHTML("confirmation");
+    $_SESSION["reservation"] = serialize($reservation);
     $_SESSION["status"] = 3;
 }
 else

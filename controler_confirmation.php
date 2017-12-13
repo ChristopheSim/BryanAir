@@ -7,13 +7,15 @@
 
     if(empty($_POST["confirm"]) || !($_POST["confirm"]=="true" && $_POST["confirm"]=="false"))
 
-   $clients = unserialize($_SESSION["clients"]);
+   $reservation = unserialize($_SESSION["reservation"]);
+   $clients = $reservation->getClients();
 
 
    if($_POST["confirm"] == "true")
     {
         //check for one client at least 18 YO
         $maj = false;
+
         foreach($clients as $client)
         {
                 if($client->getAge() >= 18)
@@ -48,9 +50,10 @@
                 $first_name = $client->getFirstName();
                 $last_name = $client->getLastName();
                 $age = $client->getAge();
+                $email = $reservation->getEmail();
                 
                     /* Association des variables SQL */
-                    mysqli_stmt_bind_param($stmt, "ssss", $first_name,$last_name, $_SESSION["email"], $age);
+                    mysqli_stmt_bind_param($stmt, "ssss", $first_name,$last_name, $email, $age);
                 
                     /* Exécution de la requête */
                 if (mysqli_stmt_execute($stmt)) {
@@ -70,7 +73,8 @@
             foreach($ids as $id)
             {                
                     /* Association des variables SQL */
-                    mysqli_stmt_bind_param($stmt, "ss", $id ,$_SESSION["flight"]);
+                    $flight_number = $reservation->getOBFlight()->getNumber();
+                    mysqli_stmt_bind_param($stmt, "ss", $id ,$flight_number);
                 
                     /* Exécution de la requête */
                 if (mysqli_stmt_execute($stmt)) {
@@ -83,7 +87,7 @@
         }
         
         //add retrun reservation in DB
-        $return_flight = $_SESSION["return"];
+        $return_flight = $reservation->getRFlight();
         if($return_flight != null)
         {
             $stmt = mysqli_stmt_init($conn);
@@ -92,7 +96,8 @@
                 foreach($ids as $id)
                 {                  
                         /* Association des variables SQL */
-                        mysqli_stmt_bind_param($stmt, "ss", $id ,$return_flight);
+                        $flight_number = $return_flight->getNumber();
+                        mysqli_stmt_bind_param($stmt, "ss", $id ,$flight_number);
                     
                         /* Exécution de la requête */
                     if (mysqli_stmt_execute($stmt)) {
@@ -111,7 +116,7 @@
     }
     else
     {
-        for($i = 0; $i < $_SESSION["reservation"]["total_passenger"]; $i++)
+        for($i = 0; $i < $reservation.getTotalPassenger(); $i++)
         {
             array_pop($clients);
                 

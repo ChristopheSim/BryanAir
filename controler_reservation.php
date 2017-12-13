@@ -27,6 +27,8 @@ mysqli_close($conn);
 
 $tags = array("destinations" => $destinationsHTML);
 $tags["title"] = "Reservation";
+if (!empty($_SESSION['error']))
+    $tags["error"] = '<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' . $_SESSION['error'] . '</div>';
 $_SESSION["status"] = 1;
 echo buildHTML("reservation", $tags);
 ?>

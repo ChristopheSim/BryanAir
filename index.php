@@ -1,8 +1,9 @@
 <?php
 
 require_once("utils.php");
-require_once("Flight.php");
-require_once("Client.php");
+require_once("models/Flight.php");
+require_once("models/Client.php");
+require_once("models/Reservation.php");
 
 session_start();
 
