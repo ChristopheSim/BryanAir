@@ -26,7 +26,7 @@
         throw new Exception("NEED ONE OVER 18");
     }
 
-
+    $_SESSION["status"] = 4;
     if($_POST["confirm"] == "true")
     {
   
@@ -37,19 +37,17 @@
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $sql = "";
-        $ids = array();
-
         // add client and reservations in DB
         $ids = $reservation->save($conn);
 
         mysqli_close($conn);
-       echo "confirmation";
+        header('Location: resumer');
+        die();
     }
     else
     {
         unset($_SESSION["reservation"]);
         echo "annulation";
     }
-    $_SESSION["status"] = 4;
+
 ?>

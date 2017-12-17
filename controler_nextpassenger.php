@@ -5,12 +5,10 @@ if(empty($_SESSION["status"]))
     header('Location: ./');
     exit();  
 }
-echo "hersdfs";
+
 if($_SESSION["status"] < 3)
 
 {
-    echo "here";
-
     if($_SESSION["status"] != 2 )
     {
         header('Location: ./');

@@ -3,7 +3,7 @@ Class Reservation
 {
     private $total_passenger;
     private $clients;
-    private $outbound_fligt;
+    private $outbound_flight;
     private $return_flight;
     private $inssurance;
     private $email;
@@ -13,7 +13,7 @@ Class Reservation
         $this->total_passenger = $total_passenger;
         $this->inssurance = $inssurance;
         $this->email = $email;
-        $this->outbound_fligt = $obFlight;
+        $this->outbound_flight = $obFlight;
         $this->return_flight = $rFlight;
         $this->clients = array();
     }
@@ -55,12 +55,29 @@ Class Reservation
 
     function getOBFlight()
     {
-        return $this->outbound_fligt;
+        return $this->outbound_flight;
     }
 
     function getRFlight()
     {
         return $this->return_flight;
+    }
+
+    function getPrice($conn)
+    {
+        $price = 0;
+        $price += $this->outbound_flight->getPrice($conn) * count($this->clients);
+        if($this->return_flight != null)
+        {
+            $price += $this->return_flight->getPrice($conn) * count($this->clients); 
+            
+            
+        }
+        if($this->inssurance)
+        {
+            //$price += 8;
+        }
+        return $price;
     }
 
     private function saveClients($conn)
@@ -100,7 +117,6 @@ Class Reservation
                     mysqli_stmt_bind_param($stmt, "sss", $id ,$flight_number, $this->inssurance);
 
                 if (mysqli_stmt_execute($stmt)) {
-                    echo "New record created successfully";
                 }
                 else {
                     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -113,7 +129,7 @@ Class Reservation
     function save($conn)
     {
         $ids = $this->saveClients($conn);
-        $this->saveReservations($conn, $ids, $this->outbound_fligt);
+        $this->saveReservations($conn, $ids, $this->outbound_flight);
         if($this->return_flight != null)
         {
             $this->saveReservations($conn, $ids, $this->return_flight);

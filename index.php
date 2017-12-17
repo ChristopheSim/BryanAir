@@ -8,6 +8,7 @@ require_once("models/Reservation.php");
 session_start();
 $tags = array("error" => "");
 //router
+
 if (!empty($_GET['page']))
 {   
     $controler_file = 'controler_'.$_GET['page'].'.php';
