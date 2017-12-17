@@ -5,33 +5,35 @@
         exit();
     }
 
-
-   $reservation = unserialize($_SESSION["reservation"]);
-   $clients = $reservation->getClients();
+        
+    $reservation = unserialize($_SESSION["reservation"]);
+    $clients = $reservation->getClients();
     $tags["title"] = "Confirmation";
 
-   if($_POST["confirm"] == "true")
+    //check for one client at least 18 YO
+    $maj = false;
+    foreach($clients as $client)
     {
-        //check for one client at least 18 YO
-        $maj = false;
+            if($client->getAge() >= 18)
+            {
+                $maj = true;
+                break;
+            }
+    }
+    if(!$maj)
+    {
+        $reservation->resetClients();
+        throw new Exception("NEED ONE OVER 18");
+    }
 
-        foreach($clients as $client)
-        {
-                if($client->getAge() >= 18)
-                {
-                    $maj = true;
-                    break;
-                }
-        }
-        if(!$maj)
-        {
-            throw new Exception("NEED ONE OVER 18");
-        }
-     
-        
+
+    if($_POST["confirm"] == "true")
+    {
+  
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         // Check connection
-        if (!$conn) {
+        if (!$conn) 
+        {
             die("Connection failed: " . mysqli_connect_error());
         }
 

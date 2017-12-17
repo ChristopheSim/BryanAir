@@ -5,9 +5,11 @@ if(empty($_SESSION["status"]))
     header('Location: ./');
     exit();  
 }
+echo "hersdfs";
 if($_SESSION["status"] < 3)
 
 {
+    echo "here";
 
     if($_SESSION["status"] != 2 )
     {
@@ -44,6 +46,7 @@ if($reservation->getRegisterdPassenger() >= $reservation->getTotalPassenger())
 }
 else
 {
+    $_SESSION["status"] = 2;
     $tags ["title"] = "Detail";
     echo buildHTML("detail", $tags);
 }

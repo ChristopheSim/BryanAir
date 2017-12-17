@@ -43,6 +43,11 @@ Class Reservation
         return $this->clients;
     }
 
+    function resetClients()
+    {
+        $this->clients = array();
+    }
+
     function getEmail()
     {
         return $this->email;
