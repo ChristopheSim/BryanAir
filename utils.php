@@ -59,9 +59,7 @@ function loadFlightSeatsNumber($conn, $dep, $arr)
     } 
     else 
     {
-        $_SESSION['error'] = '0 results';
-        header('Location: BryanAir/reservation');
-        die();
+        throw new Exception("We don't have any flight for this trip");
     }
     return $output_flight;
 }
@@ -76,9 +74,7 @@ function getAvailableSeats($conn, $flight)
     } 
     else 
     {
-        $_SESSION['error'] = '0 results'; 
-        header('Location: BryanAir/reservation');
-        die();
+        throw new Exception("No result for your search");
     }
     return $av_seats;
 }

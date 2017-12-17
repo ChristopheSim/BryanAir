@@ -1,55 +1,51 @@
 <?php
-$clients = array();
 
-if(empty($_SESSION["status"]) || $_SESSION["status"] != 2)
+if(empty($_SESSION["status"]))
 {
     header('Location: ./');
-    exit();
+    exit();  
 }
+if($_SESSION["status"] < 3)
 
-if(empty($_POST["first_name"]))
 {
-    echo "first_name not set";
-    exit();
+
+    if($_SESSION["status"] != 2 )
+    {
+        header('Location: ./');
+        exit();
+    }
+    
+    if(empty($_POST["first_name"]))
+    {
+    
+        throw new Exception("first_name not set");
+    }
+    
+    if(empty($_POST["last_name"]))
+    {
+        throw new Exception("last_name not set");
+    }
+    
+    if(empty($_POST["age"]) || !ctype_digit($_POST["age"]))
+    {
+        throw new Exception("age not set or not int");
+    }
+    
+    $reservation = unserialize($_SESSION["reservation"]);
+    
+    $reservation->addClient(new Client($_POST["first_name"], $_POST["last_name"],$_POST["age"]));
 }
 
-if(empty($_POST["last_name"]))
-{
-    echo "last_name not set";
-    exit();
-}
-
-if(empty($_POST["age"]) || !ctype_digit($_POST["age"]))
-{
-    echo "age not set or not int";
-    exit();
-}
-
-if (isset($_SESSION["clients"]))
-{
-    $clients = unserialize($_SESSION["clients"]);
-}
-
-if($_POST["first_name"] == "" || $_POST["last_name"] == "")
-{
-    $tags = array("title" => "Detail");
-    echo buildHTML("detail", $tags);
-    exit();
-}
-
-$reservation = unserialize($_SESSION["reservation"]);
-
-$reservation->addClient(new Client($_POST["first_name"], $_POST["last_name"],$_POST["age"]));
 
 if($reservation->getRegisterdPassenger() >= $reservation->getTotalPassenger()) 
 {
-    echo buildHTML("confirmation");
-    $_SESSION["reservation"] = serialize($reservation);
+    echo buildHTML("confirmation", $tags);
     $_SESSION["status"] = 3;
 }
 else
 {
-    $tags = array("title" => "Detail");
+    $tags ["title"] = "Detail";
     echo buildHTML("detail", $tags);
 }
+$_SESSION["reservation"] = serialize($reservation);
 ?>
