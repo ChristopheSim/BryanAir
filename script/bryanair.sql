@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 13 déc. 2017 à 10:32
+-- Généré le :  lun. 18 déc. 2017 à 07:43
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.1.9
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `email` varchar(100) NOT NULL,
   `age` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `flights` (
   `departure` varchar(3) NOT NULL,
   `arrival` varchar(3) NOT NULL,
   `seats` int(10) UNSIGNED NOT NULL,
+  `price` int(11) NOT NULL,
   PRIMARY KEY (`number`),
   KEY `departure` (`departure`),
   KEY `arrival` (`arrival`)
@@ -81,11 +82,11 @@ CREATE TABLE IF NOT EXISTS `flights` (
 -- Déchargement des données de la table `flights`
 --
 
-INSERT INTO `flights` (`number`, `departure`, `arrival`, `seats`) VALUES
-(3657, 'CRL', 'UTL', 150),
-(3658, 'UTL', 'CRL', 150),
-(9678, 'CRL', 'BRK', 150),
-(9679, 'BRK', 'CRL', 150);
+INSERT INTO `flights` (`number`, `departure`, `arrival`, `seats`, `price`) VALUES
+(3657, 'CRL', 'UTL', 150, 25),
+(3658, 'UTL', 'CRL', 150, 35),
+(9678, 'CRL', 'BRK', 150, 26),
+(9679, 'BRK', 'CRL', 150, 12);
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,7 @@ ALTER TABLE `flights`
 -- Contraintes pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `client` FOREIGN KEY (`client`) REFERENCES `clients` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `client` FOREIGN KEY (`client`) REFERENCES `clients` (`ID`),
   ADD CONSTRAINT `flight` FOREIGN KEY (`flight`) REFERENCES `flights` (`number`);
 COMMIT;
 
