@@ -46,4 +46,36 @@ function replaceTags($content, $tags)
     $content = preg_replace($pattern, $tags, $content);
     return  $content;
 }
+
+function loadFlightSeatsNumber($conn, $dep, $arr)
+{
+    $sql = "SELECT seats, number FROM flights WHERE departure = '$dep' && arrival = '$arr' ";
+    $result = mysqli_query($conn, $sql);
+    $flight;
+    if (mysqli_num_rows($result) > 0) 
+    {
+        $flight = mysqli_fetch_assoc($result);
+        $output_flight = new Flight($_POST["arrival"], $_POST["departure"], $flight["number"], $flight["seats"]);
+    } 
+    else 
+    {
+        throw new Exception("We don't have any flight for this trip");
+    }
+    return $output_flight;
+}
+
+function getAvailableSeats($conn, $flight)
+{
+    $sql = sprintf("SELECT COUNT(client) AS taken_seats FROM reservation WHERE flight = '%s'", $flight->getNumber());
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) 
+    {
+        $av_seats = $flight->getSeats() - mysqli_fetch_assoc($result)["taken_seats"];
+    } 
+    else 
+    {
+        throw new Exception("No result for your search");
+    }
+    return $av_seats;
+}
 ?>

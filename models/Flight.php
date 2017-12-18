@@ -33,4 +33,22 @@
         {
             return $this->flight_number;
         }
+
+        function getPrice($conn)
+        {
+           
+            $sql = "SELECT price FROM flights WHERE departure = '$this->departure' && arrival = '$this->arrival' ";
+            $result = mysqli_query($conn, $sql);
+            $flight;
+            if (mysqli_num_rows($result) > 0) 
+            {
+                $price = mysqli_fetch_assoc($result)["price"];
+            } 
+            else 
+            {
+                throw new Exception("No match found");
+            }
+            return intval($price);
+        }
+
     }

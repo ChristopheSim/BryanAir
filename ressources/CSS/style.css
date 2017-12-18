@@ -147,3 +147,7 @@ label
     font-size: 12px;
 }
 
+.table th, .table td, .table thead th {
+    border-color: rgb(241, 201, 51);
+}
+
