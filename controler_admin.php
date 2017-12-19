@@ -49,7 +49,7 @@ if (mysqli_num_rows($result) > 0)
                 <td>%s</td>
                 <td>%s</td>
                 <td>%s</td>
-                <div class='button'>
+                <td><div class='button'>
                 <a href='/BryanAir' class='btn btn-warning'>Edit</a> 
                 <button type='submit' class='btn btn-warning' >Delete</button>
                 </div>
