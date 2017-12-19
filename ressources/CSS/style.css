@@ -151,3 +151,17 @@ label
     border-color: rgb(241, 201, 51);
 }
 
+footer
+{
+    padding-top : 40px;
+    padding-left: 10px;
+}
+
+.modify
+{
+    background-color:transparent; 
+    border: none;
+    width: 100%;
+    color: white;
+}
+
