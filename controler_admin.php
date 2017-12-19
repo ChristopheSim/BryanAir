@@ -45,6 +45,7 @@ if (mysqli_num_rows($result) > 0)
                     $insurance = "Yes";
                 }
                 $tables .=  sprintf("<tr>
+
                 <form method='post'>
                 <td><input autocomplete='off' class='modify' value='%s' name='first_name' size='12'></td>
                 <td><input autocomplete='off' class='modify' value='%s' name='last_name' size='12'></td>
