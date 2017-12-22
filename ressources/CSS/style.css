@@ -159,9 +159,26 @@ footer
 
 .modify
 {
-    background-color:transparent; 
+    background-color: transparent; 
     border: none;
     width: 100%;
     color: white;
 }
 
+#homeCarousel
+{
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.carousel-item
+{
+    height: 300px;
+}
+
+.carousel-item img
+{
+    position: relative;
+    top: 65%;
+    transform: translateY(-50%);
+}
