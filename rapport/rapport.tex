@@ -10,6 +10,8 @@
 \usepackage{subcaption}
 \usepackage{microtype}
 \usepackage{listings}
+\usepackage{hyperref}
+
 \title{Conception d'une application web de réservation\\[3mm] \normalsize{\it Laboratoire de technologie web}}
 \author{Christophe Simon \\ Guillaume de Moffarts}
 \date{\today}
@@ -59,16 +61,65 @@ morecomment=[l]{//},}
 \begin{document}
 	\maketitle
 	\section*{Introduction}
-		Dans le cadre du laboratoire de Technologie web, nous avons réaliser une application web dont le but est de réserver des billets d'avion. 
+		Dans le cadre du laboratoire de Technologie web, nous avons réaliser une application web dont le but est de réserver des billets d'avion. Cette application doit suivre le design pattern MVC (Model View Controler).
 		
-		Nous avons choisis comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appeler BryanAir.
-		Le style de notre application à été insiprer du site officiel de la compagnie. 
+		Nous avons choisis comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appeler BryanAir. Le style de notre application à été inspirer du site officiel de la compagnie. 
 		
 		Dans ce rapport, vous allez trouver des explications sur le fonctionnement normal et erroné de l'application. Vous y trouverez un diagramme de séquence pour imager cela. 
 	
 				
 	\section{Description du site}
-			   
+		Il y a tout d'abord une page d'accueil (figure~\ref{fig:home}) qui permet de se rediriger vers une section pour effectuer la réservation d'un vol.
+		\begin{figure}
+			%\includegraphics[scale=1]{}
+			\caption{Page d'accueil}
+			\label{fig:home}
+		\end{figure}	
+		
+		Il y a une première page (figure~\ref{fig:res1}) pour réserver un ou plusieurs billets ou il faut donner l'aéroport de départ et d'arrivée, si on veut réserver un billet aller simple ou aller retour, le nombre de passager, l'adresse email et si on désire une assurance annulation ou pas.   
+		\begin{figure}
+			\caption{Réservation étape 1}
+			\label{fig:res1}
+		\end{figure}		
+		
+		La deuxième étape pour la réservation (figure~\ref{fig:res2}) consiste a enregistrer les informations pour chaque passager tel que le nom, le prénom et l'age. 
+		\begin{figure}
+			\caption{Réservation étape 2}
+			\label{fig:res2}
+		\end{figure}	
+		
+		Une fois tous les passagers enregistrés, on arrive sur une page de confirmation (figure~\ref{fig:conf}) ou vous avez soit le choix de confirmer ou d'annuler.  
+			
+		\begin{figure}
+			\caption{Confirmation}
+			\label{fig:conf}
+		\end{figure}		
+		Une fois la réservation confirmée, on arrive sur une page récapitulant la commande (figure~\ref{fig:recap}) avec le prix a payer.  
+		\begin{figure}
+			\caption{Récapitulatif}
+			\label{fig:recap}
+		\end{figure}	
+		
+		Enfin, il y a une page d'administration (figure~\ref{fig:admin}) ou on peut voir, éditer ou supprimer les passager pour chaque vol. Cette page n'étant pas une page devant être accessible du public, elle est accessible uniquement via l'URL \url{http://localhost/BryanAir/admin} 
+		
+		\begin{figure}
+			\caption{Page admin}
+			\label{fig:admin}
+		\end{figure}			
+				     
 	\section{Fonctionnement}
+		Dans cette section, vous retrouvez les explications sur le fonctionnement des différentes partie de l'application, tel que la redirection d'URL, les réservation et la page d'administration et les templates html.
+		\subsection*{Redirection}
+		Le principe de l'application est donc basé sur le design pattern MVC. Nous avons donc un routeur, de contrôleurs et de views. Le routeur redirige vers le contrôleur adéquate qui va vérifier les informations venant des formulaire, charger et enregistrer les modèles dans la base de donnée. le contrôleur va ensuite afficher la page.   	
+	
+		Lorsque qu'on veux accéder a une page, il suffit d'utiliser l'URL suivante \url{localhost/BryanAir/} suivit du nom de la page a accéder. Cette URL est rediriger vers \url{localhost/Bryanair?page=<nom de page>}. La variable \texttt{page} est utiliser par le routeur pour rediriger vers le contrôleur adéquat. Nous avons fait ce choix pour qu'il soit plus facile d'accéder aux pages voulues. Cette redirection est configurer dans le fichier \texttt{.htacces}.
+		
+		\subsection*{Templates}
+		Pour faciliter la construction des vues, nous avons utiliser un principe de templates html. Nous avons creer un système de balisage comme suit, \texttt{\$balise\$}. La fonction \texttt{buildHTML} dans le fichier \texttt{utils.php} construit d'abord la page en concaténant quartes fichiers HTML. Trois de ces fichier sont commun pour toute les vues, il y'a a les \texttt{head}, un header et un footer.  Entre ces deux dernier, la vue propre a la page est ajouter. 
+		On remplace ensuite toute les balise, grâce a du regex, par des bout d'HTML construit par le contrôler. Cette fonction prend en paramètre un liste de clef valeurs. Les clefs correspond aux la balises dans l'HTML et les valeur contienne donc le contenu a remplacer.  
+		
+		Cette méthode permet de facilité grandement la création des vues.          
+		   
+		
 	\section*{Conclusion}
 \end{document}
