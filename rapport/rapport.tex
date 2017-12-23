@@ -1,0 +1,74 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{rotating}
+\usepackage{dirtree}
+\usepackage{subcaption}
+\usepackage{microtype}
+\usepackage{listings}
+\title{Conception d'une application web de réservation\\[3mm] \normalsize{\it Laboratoire de technologie web}}
+\author{Christophe Simon \\ Guillaume de Moffarts}
+\date{\today}
+\setlength\topmargin{-10mm}
+\setlength\headheight{0mm}
+\setlength\textheight{24cm}
+\setlength\oddsidemargin{-0.5cm}
+\setlength\textwidth{16.5cm}
+\setlength{\parskip}{3mm}
+\setlength{\parindent}{0mm}
+\usepackage{xcolor}
+
+\lstdefinelanguage{php}
+{morekeywords=[1]{class,function,private,return,if,else,for,throw,new,null,while,for,foreach,as},
+morekeywords=[2]{},
+morekeywords=[3]{echo,Exception,exit,empty,header,isset,serialize,unserialize,count,array_push,array,die,sprintf},
+morekeywords=[4]{\$this,\$_POST,\$_SESSION},
+morekeywords=[5]{mysqli_query,mysqli_num_rows,mysqli_fetch_assoc,mysqli_connect,mysqli_close,mysqli_stmt_init,mysqli_stmt_prepare,mysqli_stmt_bind_param,mysqli_stmt_execute,mysqli_insert_id,mysqli_error,mysqli_connect_error},
+morestring=[b]{"},
+morestring=[b]{'},
+morecomment=[l]{//},}
+
+\lstset{ 
+    basicstyle=\fontfamily{pcr}\selectfont\scriptsize\color{black},
+    keywordstyle=[1]\color{blue}\bfseries, % style for keywords
+    keywordstyle=[3]\color[rgb]{0,0.6,0}\bfseries, % style for keywords
+    keywordstyle=[4]\color[rgb]{0.6,0,0}\bfseries, % style for keywords
+    keywordstyle=[5]\color[rgb]{0,0.2,0}\bfseries, % style for keywords
+    stringstyle=\color[rgb]{0.6,0.47,1}, %style between " "
+    commentstyle=\color[rgb]{0.3,0.7,0.3},
+    numbers=left, % where to put the line-numbers
+    numberstyle=\tiny, % the size of the fonts that are used for the line-numbers     
+    showspaces=false, % show spaces adding particular underscores
+    showstringspaces=false, % underline spaces within strings
+    showtabs=false, % show tabs within strings adding particular underscores
+    frame=single, % adds a frame around the code
+    tabsize=2, % sets default tabsize to 2 spaces
+    rulecolor=\color{black},
+    captionpos=b, % sets the caption-position to bottom
+    breaklines=true, % sets automatic line breaking
+    breakatwhitespace=false,
+    frame={}
+}
+
+\newcommand{\file}[1]{"C:/wamp64/www/BryanAir/#1"}
+
+\begin{document}
+	\maketitle
+	\section*{Introduction}
+		Dans le cadre du laboratoire de Technologie web, nous avons réaliser une application web dont le but est de réserver des billets d'avion. 
+		
+		Nous avons choisis comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appeler BryanAir.
+		Le style de notre application à été insiprer du site officiel de la compagnie. 
+		
+		Dans ce rapport, vous allez trouver des explications sur le fonctionnement normal et erroné de l'application. Vous y trouverez un diagramme de séquence pour imager cela. 
+	
+				
+	\section{Description du site}
+			   
+	\section{Fonctionnement}
+	\section*{Conclusion}
+\end{document}
