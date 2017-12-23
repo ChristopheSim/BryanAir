@@ -47,7 +47,7 @@
     else
     {
         unset($_SESSION["reservation"]);
-        header('Location: home');
+        header('Location: ./');
     }
 
 ?>
