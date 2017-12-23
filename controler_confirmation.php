@@ -47,7 +47,7 @@
     else
     {
         unset($_SESSION["reservation"]);
-        echo "annulation";
+        header('Location: home');
     }
 
 ?>
