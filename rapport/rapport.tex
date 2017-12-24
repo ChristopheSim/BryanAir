@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc}
 \usepackage[french]{babel}
 \usepackage{lmodern}
 \usepackage{graphicx}
@@ -27,14 +27,25 @@
 \lstdefinelanguage{php}
 {morekeywords=[1]{class,function,private,return,if,else,for,throw,new,null,while,for,foreach,as},
 morekeywords=[2]{},
-morekeywords=[3]{echo,Exception,exit,empty,header,isset,serialize,unserialize,count,array_push,array,die,sprintf},
+morekeywords=[3]{echo,Exception,exit,empty,header,isset,serialize,unserialize,count,array_push,array,die,sprintf, include},
 morekeywords=[4]{\$this,\$_POST,\$_SESSION},
 morekeywords=[5]{mysqli_query,mysqli_num_rows,mysqli_fetch_assoc,mysqli_connect,mysqli_close,mysqli_stmt_init,mysqli_stmt_prepare,mysqli_stmt_bind_param,mysqli_stmt_execute,mysqli_insert_id,mysqli_error,mysqli_connect_error},
 morestring=[b]{"},
 morestring=[b]{'},
 morecomment=[l]{//},}
 
+\lstdefinelanguage{CSS}
+{morekeywords=[1]{color,border,text,decoration,margin,padding,left,top,right,background,font,size,weight,float, width, height, display, position, cursor, bottom, opacity, radius, content, family, transition, webkit, transform, max, overflow},
+morekeywords=[2]{first,child,nth,of,type,letter,selection},
+morekeywords=[3]{h1,p,div,tr,td},
+morekeywords=[4]{},
+morekeywords=[5]{},
+sensitive,
+morecomment=[s]{/*}{*/},}
+
 \lstset{
+    extendedchars=\true,
+    inputencoding=utf8x,
     basicstyle=\fontfamily{pcr}\selectfont\scriptsize\color{black},
     keywordstyle=[1]\color{blue}\bfseries, % style for keywords
     keywordstyle=[3]\color[rgb]{0,0.6,0}\bfseries, % style for keywords
@@ -42,8 +53,8 @@ morecomment=[l]{//},}
     keywordstyle=[5]\color[rgb]{0,0.2,0}\bfseries, % style for keywords
     stringstyle=\color[rgb]{0.6,0.47,1}, %style between " "
     commentstyle=\color[rgb]{0.3,0.7,0.3},
-    numbers=left, % where to put the line-numbers
-    numberstyle=\tiny, % the size of the fonts that are used for the line-numbers
+    %numbers=left, % where to put the line-numbers
+    %numberstyle=\tiny, % the size of the fonts that are used for the line-numbers
     showspaces=false, % show spaces adding particular underscores
     showstringspaces=false, % underline spaces within strings
     showtabs=false, % show tabs within strings adding particular underscores
@@ -56,6 +67,8 @@ morecomment=[l]{//},}
     frame={}
 }
 
+\usepackage{listingsutf8}
+\usepackage{libertine}
 \newcommand{\file}[1]{"C:/wamp64/www/BryanAir/#1"}
 
 \begin{document}
@@ -71,19 +84,21 @@ morecomment=[l]{//},}
 	\section{Description du site}
 		Il y a tout d'abord une page d'accueil (figure~\ref{fig:home}) qui permet de se rediriger vers une section pour effectuer la réservation d'un vol.
 		\begin{figure}
-			%\includegraphics[scale=1]{}
+			\includegraphics[width=\textwidth]{home.png}
 			\caption{Page d'accueil}
 			\label{fig:home}
 		\end{figure}
 
 		Sur la première page de réservation (figure~\ref{fig:res1}), on peut réserver un ou plusieurs billets. Il faut donner l'aéroport de départ et d'arrivée, si on veut réserver un billet aller simple ou aller retour, le nombre de passager, l'adresse email et si on désire une assurance annulation ou pas.
 		\begin{figure}
+      \includegraphics[width=\textwidth]{Reservation.png}
 			\caption{Réservation étape 1}
 			\label{fig:res1}
 		\end{figure}
 
 		La deuxième étape de réservation (figure~\ref{fig:res2}) consiste a enregistrer les informations pour chaque passager tel que le nom, le prénom et l'age.
 		\begin{figure}
+      \includegraphics[width=\textwidth]{Detail.png}
 			\caption{Réservation étape 2}
 			\label{fig:res2}
 		\end{figure}
@@ -91,11 +106,13 @@ morecomment=[l]{//},}
 		Une fois tous les passagers enregistrés, on arrive sur une page de confirmation (figure~\ref{fig:conf}) ou vous avez le choix de confirmer ou d'annuler.
 
 		\begin{figure}
+      \includegraphics[width=\textwidth]{Confirmation.png}
 			\caption{Confirmation}
 			\label{fig:conf}
 		\end{figure}
 		Une fois la réservation confirmée, on arrive sur une page récapitulant la commande (figure~\ref{fig:recap}) avec le prix a payer.
 		\begin{figure}
+      \includegraphics[width=\textwidth]{Resumer.png}
 			\caption{Récapitulatif}
 			\label{fig:recap}
 		\end{figure}
@@ -103,6 +120,7 @@ morecomment=[l]{//},}
 		Enfin, il y a une page d'administration (figure~\ref{fig:admin}) ou on peut voir, éditer ou supprimer les passager pour chaque vol. Cette page ne devant ètre accessible du public, on y accède uniquement via \url{http://localhost/BryanAir/admin}.
 
 		\begin{figure}
+      \includegraphics[width=\textwidth]{admin.png}
 			\caption{Page admin}
 			\label{fig:admin}
 		\end{figure}
@@ -125,6 +143,7 @@ morecomment=[l]{//},}
 
 			Lorsque l'utilisateur valide la première page de réservation (figure~\ref{fig:res1}), un contrôleur (controleur\_detail.php) vérifie tout d'abord les données venant du \texttt{POST}. En effet si on passe bien par le formulaire, il ne devrais pas avoir de problème mais on peut tout a fait utilisé un outil tel que curl pour envoyer n'importe quel requète POST au serveur ou tout simplement en changeant l'html dans l'inspecteur du navigateur, on peut envoyer du text au lieu d'un entier. Il faut donc bien vérifier que toutes les données du \texttt{POST} nécessaire au contrôleur on bien été définies et sont de type correcte. Par exemple, la variable contenant le nombre de passager doit pouvoir ètre convertit en un entier. Si un problème survient dans la vérification des variables , vous etes redirigez vers la page précédentes avec un message d'erreur sur le haut de celle ci (figure~\ref{fig:error}. Si la vérification a réussie, Le controleur cherche dans la base de donnée les numéros de vols (aller/retour) et le nombre de place restantes. Si il n'y a plus de place pour un des vols ou qu'il ne trouve pas de vol pour les aéroport sélectionner, on aura un message d'erreur comme décrit précédement. Toutes ces informations sont utilisées pour pour instanttier un objet de type \texttt{Reservation} et en définir l'état. Le controleur va ensuite construire la page HTML (detail.html) grace a la fonction expliqué dans les section précédente.
 			\begin{figure}
+        \includegraphics[width=\textwidth]{Error.png}
 				\caption{Message d'erreur}
 				\label{fig:error}
 			\end{figure}
@@ -135,6 +154,7 @@ morecomment=[l]{//},}
 			Une fois arriver sur la page de confirmation (figure~\ref{fig:conf}), on a le choix entre confirmer la réservation ou de l'annuler. Si la réservation est annulée, on est redirigé vers la page d'accueil et les l'objet réservation avec la liste des client est supprimé. Si on confirme la réservation, un contréleur (controleur\_confirmation.php) vérifie si au moins un des passagers est bien majeurs. Si ce n'est pas le cas, le système d'erreur affiche un message (figure~\ref{fig:ageError}), il faudra ré-encoder les informations des passagers. Si il y a bien au moins une personne majeur, le contrôleur enregistre les clients et réservations dans la basse de données et va ensuite nous rediriger vers une page résumant la commande(figure~\ref{fig:recap}).
 
 			\begin{figure}
+        \includegraphics[width=\textwidth]{ageError.png}
 				\caption{Erreur de majorité}
 				\label{fig:ageError}
 			\end{figure}
@@ -145,4 +165,112 @@ morecomment=[l]{//},}
 			En allant sur la page admin, le contrôleur (controler\_admin.php) charge depuis la base de donnée tout les vols ainsi que les passager pour chacun d'eux. Il en fait un tableau html représantant toute ces donnée puis construit la page html (admin.html).
 
 	\section*{Conclusion}
+
+  \pagebreak
+  \appendix
+  \section{Modèles}
+    \subsection{Client.php}
+    \lstinputlisting[language=php]{\file{models/Client.php}}
+    \subsection{Flight.php}
+    \lstinputlisting[language=php]{\file{models/Flight.php}}
+    \subsection{Reservation.php}
+    \lstinputlisting[language=php]{\file{models/Reservation.php}}
+\section{templates}
+  \subsection{home.html}
+  \lstinputlisting[language=html]{\file{templates/home.html}}
+  \subsection{reservation.html}
+  \lstinputlisting[language=html]{\file{templates/reservation.html}}
+  \subsection{detail.html}
+  \lstinputlisting[language=html]{\file{templates/detail.html}}
+  \subsection{confirmation.html}
+  \lstinputlisting[language=html]{\file{templates/confirmation.html}}
+  \subsection{resumer.html}
+  \lstinputlisting[language=html]{\file{templates/resumer.html}}
+  \subsection{admin.html}
+  \lstinputlisting[language=html]{\file{templates/admin.html}}
+  \subsection{head.html}
+  \lstinputlisting[language=html]{\file{templates/head.html}}
+  \subsection{header.html}
+  \lstinputlisting[language=html]{\file{templates/header.html}}
+  \subsection{footer.html}
+  \lstinputlisting[language=html]{\file{templates/footer.html}}
+  \subsection{admin.html}
+  \lstinputlisting[language=html]{\file{templates/admin.html}}
+
+\section{Controlers}
+  \subsection{controler\_home.php}
+  \lstinputlisting[language=php]{\file{controler_home.php}}
+  \subsection{controle\_reservation.php}
+  \lstinputlisting[language=php]{\file{controler_reservation.php}}
+  \subsection{controler\_detail.php}
+  \lstinputlisting[language=php]{\file{controler_detail.php}}
+  \subsection{controler\_nextpassenger.php}
+  \lstinputlisting[language=php]{\file{controler_nextpassenger.php}}
+  \subsection{controler\_confirmation.php}
+  \lstinputlisting[language=php]{\file{controler_confirmation.php}}
+  \subsection{controler\_resumer.php}
+  \lstinputlisting[language=php]{\file{controler_resumer.php}}
+  \subsection{controler\_admin.php}
+  \lstinputlisting[language=php]{\file{controler_admin.php}}
+  \subsection{controler\_update.php}
+  \lstinputlisting[language=php]{\file{controler_update.php}}
+  \subsection{controler\_delete.php}
+  \lstinputlisting[language=php]{\file{controler_delete.php}}
+  \subsection{controler\_404.php}
+  \lstinputlisting[language=php]{\file{controler_404.php}}
+
+\section{Other}
+  \subsection{.htaccess}
+  \lstinputlisting[language={}]{\file{.htaccess}}
+  \subsection{index.php}
+  \lstinputlisting[language=php]{\file{index.php}}
+  \subsection{utils.php}
+  \lstinputlisting[language=php]{\file{utils.php}}
+  \subsection{style.css}
+  \lstinputlisting[language=css]{\file{ressources/CSS/style.css}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

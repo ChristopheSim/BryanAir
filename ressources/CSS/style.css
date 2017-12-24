@@ -29,11 +29,6 @@ title
     color: blue
 }
 
-object #document path
-{
-    fill: red;
-}
-
 .blue-box
 {
     background-color: #2691e4;
@@ -42,7 +37,7 @@ object #document path
     padding-bottom: 10px
 }
 
-/* The container */
+/* check box container */
 .form-check-label {
     display: block;
     position: relative;
@@ -68,7 +63,7 @@ object #document path
     border-radius: 50%;
     border: 1.5px solid white;
     margin-top: 1px;
-    
+
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -115,11 +110,11 @@ object #document path
 .form-check-label .toggle:before {
     content:"";
     position: absolute;
- 	top: -3px;
-	left: -10px;
-	width: 21px;
-	height: 21px;
-	border-radius: 50%;
+ 	  top: -3px;
+	  left: -10px;
+	  width: 21px;
+	  height: 21px;
+	  border-radius: 50%;
     background-color: hsla(206, 78%, 62%, 1);
     -webkit-transition: .4s;
     transition: .4s;
@@ -159,7 +154,7 @@ footer
 
 .modify
 {
-    background-color: transparent; 
+    background-color: transparent;
     border: none;
     width: 100%;
     color: white;

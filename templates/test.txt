@@ -1,3 +1,0 @@
-<b>coucou</b>
-
-<i>oo</i>
