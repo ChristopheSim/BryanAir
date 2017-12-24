@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[T1]{fontenc}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 \usepackage{lmodern}
 \usepackage{graphicx}
@@ -12,7 +12,7 @@
 \usepackage{listings}
 \usepackage{hyperref}
 
-\title{Conception d'une application web de r�servation\\[3mm] \normalsize{\it Laboratoire de technologie web}}
+\title{Conception d'une application web de réservation\\[3mm] \normalsize{\it Laboratoire de technologie web}}
 \author{Christophe Simon \\ Guillaume de Moffarts}
 \date{\today}
 \setlength\topmargin{-10mm}
@@ -34,7 +34,7 @@ morestring=[b]{"},
 morestring=[b]{'},
 morecomment=[l]{//},}
 
-\lstset{ 
+\lstset{
     basicstyle=\fontfamily{pcr}\selectfont\scriptsize\color{black},
     keywordstyle=[1]\color{blue}\bfseries, % style for keywords
     keywordstyle=[3]\color[rgb]{0,0.6,0}\bfseries, % style for keywords
@@ -43,7 +43,7 @@ morecomment=[l]{//},}
     stringstyle=\color[rgb]{0.6,0.47,1}, %style between " "
     commentstyle=\color[rgb]{0.3,0.7,0.3},
     numbers=left, % where to put the line-numbers
-    numberstyle=\tiny, % the size of the fonts that are used for the line-numbers     
+    numberstyle=\tiny, % the size of the fonts that are used for the line-numbers
     showspaces=false, % show spaces adding particular underscores
     showstringspaces=false, % underline spaces within strings
     showtabs=false, % show tabs within strings adding particular underscores
@@ -61,65 +61,88 @@ morecomment=[l]{//},}
 \begin{document}
 	\maketitle
 	\section*{Introduction}
-		Dans le cadre du laboratoire de Technologie web, nous avons r�aliser une application web dont le but est de r�server des billets d'avion. Cette application doit suivre le design pattern MVC (Model View Controler).
-		
-		Nous avons choisis comme id�e de r�aliser une caricature de la compagnie a�rienne Ryanair, que nous avons appeler BryanAir. Le style de notre application � �t� inspirer du site officiel de la compagnie. 
-		
-		Dans ce rapport, vous allez trouver des explications sur le fonctionnement normal et erron� de l'application. Vous y trouverez un diagramme de s�quence pour imager cela. 
-	
-				
+		Dans le cadre du laboratoire de Technologie web, nous avons réaliser une application web dont le but est de réserver des billets d'avion. Cette application doit suivre le design pattern MVC (Model View Controler).
+
+		Nous avons choisis comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appeler BryanAir. Le style de notre application à été inspirer du site officiel de la compagnie.
+
+		Dans ce rapport, vous allez trouver des explications sur le fonctionnement normal et erroné de l'application. Vous y trouverez un diagramme de séquence pour imager cela.
+
+
 	\section{Description du site}
-		Il y a tout d'abord une page d'accueil (figure~\ref{fig:home}) qui permet de se rediriger vers une section pour effectuer la r�servation d'un vol.
+		Il y a tout d'abord une page d'accueil (figure~\ref{fig:home}) qui permet de se rediriger vers une section pour effectuer la réservation d'un vol.
 		\begin{figure}
 			%\includegraphics[scale=1]{}
 			\caption{Page d'accueil}
 			\label{fig:home}
-		\end{figure}	
-		
-		Il y a une premi�re page (figure~\ref{fig:res1}) pour r�server un ou plusieurs billets ou il faut donner l'a�roport de d�part et d'arriv�e, si on veut r�server un billet aller simple ou aller retour, le nombre de passager, l'adresse email et si on d�sire une assurance annulation ou pas.   
+		\end{figure}
+
+		Sur la première page de réservation (figure~\ref{fig:res1}), on peut réserver un ou plusieurs billets. Il faut donner l'aéroport de départ et d'arrivée, si on veut réserver un billet aller simple ou aller retour, le nombre de passager, l'adresse email et si on désire une assurance annulation ou pas.
 		\begin{figure}
-			\caption{R�servation �tape 1}
+			\caption{Réservation étape 1}
 			\label{fig:res1}
-		\end{figure}		
-		
-		La deuxi�me �tape pour la r�servation (figure~\ref{fig:res2}) consiste a enregistrer les informations pour chaque passager tel que le nom, le pr�nom et l'age. 
+		\end{figure}
+
+		La deuxième étape de réservation (figure~\ref{fig:res2}) consiste a enregistrer les informations pour chaque passager tel que le nom, le prénom et l'age.
 		\begin{figure}
-			\caption{R�servation �tape 2}
+			\caption{Réservation étape 2}
 			\label{fig:res2}
-		\end{figure}	
-		
-		Une fois tous les passagers enregistr�s, on arrive sur une page de confirmation (figure~\ref{fig:conf}) ou vous avez soit le choix de confirmer ou d'annuler.  
-			
+		\end{figure}
+
+		Une fois tous les passagers enregistrés, on arrive sur une page de confirmation (figure~\ref{fig:conf}) ou vous avez le choix de confirmer ou d'annuler.
+
 		\begin{figure}
 			\caption{Confirmation}
 			\label{fig:conf}
-		\end{figure}		
-		Une fois la r�servation confirm�e, on arrive sur une page r�capitulant la commande (figure~\ref{fig:recap}) avec le prix a payer.  
+		\end{figure}
+		Une fois la réservation confirmée, on arrive sur une page récapitulant la commande (figure~\ref{fig:recap}) avec le prix a payer.
 		\begin{figure}
-			\caption{R�capitulatif}
+			\caption{Récapitulatif}
 			\label{fig:recap}
-		\end{figure}	
-		
-		Enfin, il y a une page d'administration (figure~\ref{fig:admin}) ou on peut voir, �diter ou supprimer les passager pour chaque vol. Cette page n'�tant pas une page devant �tre accessible du public, elle est accessible uniquement via l'URL \url{http://localhost/BryanAir/admin} 
-		
+		\end{figure}
+
+		Enfin, il y a une page d'administration (figure~\ref{fig:admin}) ou on peut voir, éditer ou supprimer les passager pour chaque vol. Cette page ne devant ètre accessible du public, on y accède uniquement via \url{http://localhost/BryanAir/admin}.
+
 		\begin{figure}
 			\caption{Page admin}
 			\label{fig:admin}
-		\end{figure}			
-				     
+		\end{figure}
+
 	\section{Fonctionnement}
-		Dans cette section, vous retrouvez les explications sur le fonctionnement des diff�rentes partie de l'application, tel que la redirection d'URL, les r�servation et la page d'administration et les templates html.
+		Dans cette section, vous retrouvez les explications sur le fonctionnement des différentes partie de l'application, tel que la redirection d'URL, les réservation et la page d'administration et les templates html.
 		\subsection*{Redirection}
-		Le principe de l'application est donc bas� sur le design pattern MVC. Nous avons donc un routeur, de contr�leurs et de views. Le routeur redirige vers le contr�leur ad�quate qui va v�rifier les informations venant des formulaire, charger et enregistrer les mod�les dans la base de donn�e. le contr�leur va ensuite afficher la page.   	
-	
-		Lorsque qu'on veux acc�der a une page, il suffit d'utiliser l'URL suivante \url{localhost/BryanAir/} suivit du nom de la page a acc�der. Cette URL est rediriger vers \url{localhost/Bryanair?page=<nom de page>}. La variable \texttt{page} est utiliser par le routeur pour rediriger vers le contr�leur ad�quat. Nous avons fait ce choix pour qu'il soit plus facile d'acc�der aux pages voulues. Cette redirection est configurer dans le fichier \texttt{.htacces}.
-		
+		La conception de l'application est basé sur le design pattern MVC. Nous avons donc un routeur, des contrôleurs et des views. Le routeur redirige vers le contrôleur adéquate qui va vérifier les informations venant des formulaire, charger et enregistrer les modèles dans la base de donnée. Le contrôleur va ensuite afficher la page.
+
+		Lorsque qu'on veux accéder a une page, il suffit d'utiliser l'URL suivante \url{localhost/BryanAir/} suivit du nom de la page a accéder. Cette URL est rediriger vers \url{localhost/Bryanair?page=<nom_de_page>} car le routeur a besoin d'une variable \texttt{GET["page"]} pour pouvoir rediriger vers le bon controleur. Nous avons fait ce choix pour qu'il soit plus facile d'accéder aux différentes pages. Cette redirection est configurer dans le fichier \texttt{.htacces}.
+
 		\subsection*{Templates}
-		Pour faciliter la construction des vues, nous avons utiliser un principe de templates html. Nous avons creer un syst�me de balisage comme suit, \texttt{\$balise\$}. La fonction \texttt{buildHTML} dans le fichier \texttt{utils.php} construit d'abord la page en concat�nant quartes fichiers HTML. Trois de ces fichier sont commun pour toute les vues, il y'a a les \texttt{head}, un header et un footer.  Entre ces deux dernier, la vue propre a la page est ajouter. 
-		On remplace ensuite toute les balise, gr�ce a du regex, par des bout d'HTML construit par le contr�ler. Cette fonction prend en param�tre un liste de clef valeurs. Les clefs correspond aux la balises dans l'HTML et les valeur contienne donc le contenu a remplacer.  
-		
-		Cette m�thode permet de facilit� grandement la cr�ation des vues.          
-		   
-		
+		Pour faciliter la construction des vues, nous avons utiliser un sytème de templates html. Nous avons plassé des balises comme suit \texttt{\$balise\$} dans nos pages html. Celle-ci vont etre remplacer par le contrôleur. La fonction \texttt{buildHTML} dans le fichier \texttt{utils.php} construit d'abord la page en concaténant quartes fichiers HTML. Trois de ces fichier sont commun pour toute les vues, il y'a a le \texttt{head.html}, le \texttt{header.html} et le \texttt{footer.html}.  Entre ces deux dernier, la vue propre a la page est ajouté.
+		On remplace ensuite toute les balise, grâce a du regex, par des bouts d'HTML construit par le contrôler. Cette fonction prend en paramètre un liste de clef valeurs, les clefs correspond aux mots dans les balises de l'HTML et les valeur contienne donc le contenu a remplacer.
+
+		Cette méthode permet de faciliter grandement la création des vues. En effet, il ne sera pas nécésaire de copier dans tous les fichier html un bout de code commun a toute les pages. Cette méthodes permet aussi de bien séparer la partie vu de la partie controleur.
+
+		\subsection{Réservation}
+      Tous d'abord, en cliquant sur le bouton réservation de la page d'acceuil, le controleur (controle\_reservation.php) charge la liste de tous les aéroport présent dans la base de donées. Le contrôleur va ensuite contruire la page de réservation grace a cette liste.
+
+			Lorsque l'utilisateur valide la première page de réservation (figure~\ref{fig:res1}), un contrôleur (controleur\_detail.php) vérifie tout d'abord les données venant du \texttt{POST}. En effet si on passe bien par le formulaire, il ne devrais pas avoir de problème mais on peut tout a fait utilisé un outil tel que curl pour envoyer n'importe quel requète POST au serveur ou tout simplement en changeant l'html dans l'inspecteur du navigateur, on peut envoyer du text au lieu d'un entier. Il faut donc bien vérifier que toutes les données du \texttt{POST} nécessaire au contrôleur on bien été définies et sont de type correcte. Par exemple, la variable contenant le nombre de passager doit pouvoir ètre convertit en un entier. Si un problème survient dans la vérification des variables , vous etes redirigez vers la page précédentes avec un message d'erreur sur le haut de celle ci (figure~\ref{fig:error}. Si la vérification a réussie, Le controleur cherche dans la base de donnée les numéros de vols (aller/retour) et le nombre de place restantes. Si il n'y a plus de place pour un des vols ou qu'il ne trouve pas de vol pour les aéroport sélectionner, on aura un message d'erreur comme décrit précédement. Toutes ces informations sont utilisées pour pour instanttier un objet de type \texttt{Reservation} et en définir l'état. Le controleur va ensuite construire la page HTML (detail.html) grace a la fonction expliqué dans les section précédente.
+			\begin{figure}
+				\caption{Message d'erreur}
+				\label{fig:error}
+			\end{figure}
+
+
+			Nous somme maintenant a la deuxième étapes de la réservations (figure~\ref{fig:res2}) où il faut encoder un a un les informations sur les passagers. Comme pour la première étapes, un contrôleurs (controleur\_nextpassenger.php) vérifie les informations de la variable \texttt{HTTP POST}, le même systéme d'erreur est aussi d'application. Une fois la vérification passée, le contrôleur instancie un objet de type \texttt{Client} dont l'état est définit pas les informations entrées dans le formulaire. Cet objet client est ensuite ajouter dans la liste de client de l'objet réservation. Si il y a encore des passager a enregistrer, le contrôleur contruit la même page html que précédemment pour enregistrer un nouveau passager. Si tous les passager sont enregistré, le contrôleur construit la page de confirmation (confirmation.html).
+
+			Une fois arriver sur la page de confirmation (figure~\ref{fig:conf}), on a le choix entre confirmer la réservation ou de l'annuler. Si la réservation est annulée, on est redirigé vers la page d'accueil et les l'objet réservation avec la liste des client est supprimé. Si on confirme la réservation, un contréleur (controleur\_confirmation.php) vérifie si au moins un des passagers est bien majeurs. Si ce n'est pas le cas, le système d'erreur affiche un message (figure~\ref{fig:ageError}), il faudra ré-encoder les informations des passagers. Si il y a bien au moins une personne majeur, le contrôleur enregistre les clients et réservations dans la basse de données et va ensuite nous rediriger vers une page résumant la commande(figure~\ref{fig:recap}).
+
+			\begin{figure}
+				\caption{Erreur de majorité}
+				\label{fig:ageError}
+			\end{figure}
+
+			Le contrôleur (controleur\_resumer.php) permettant d'afficher cette page vas tout d'abord construire un tableau html, avec tout les passagers  de la réservation, grâce a l'objet réservation. Cet objet se charge aussi de calculer le prix total a payer en se basant sur le nombre de passager, si il on prix un vol aller retour ou aller simple et enfin, si une assurance annulation est prise. Le contrôleur vas ensuite construire la page avec toute ces information.
+
+		\subsection{Admin}
+			En allant sur la page admin, le contrôleur (controler\_admin.php) charge depuis la base de donnée tout les vols ainsi que les passager pour chacun d'eux. Il en fait un tableau html représantant toute ces donnée puis construit la page html (admin.html).
+
 	\section*{Conclusion}
 \end{document}

@@ -1,3 +1,0 @@
-\select@language {french}
-\contentsline {section}{\numberline {1}Description du site}{1}{section.1}
-\contentsline {section}{\numberline {2}Fonctionnement}{2}{section.2}
