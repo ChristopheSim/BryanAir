@@ -65,34 +65,34 @@ morecomment=[l]{//},}
 \begin{document}
 	\maketitle
 	\section*{Introduction}
-		Dans le cadre du laboratoire de Technologie web, nous avons réaliser une application web dont le but est de réserver des billets d'avion. Cette application doit suivre le design pattern MVC (Model View Controller).
+		Dans le cadre du laboratoire de Technologie web, nous avons réalisé une application web dont le but est de réserver des billets d'avion. Cette application doit suivre le design pattern MVC (Model View Controller).
 
-		Nous avons choisis comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appeler BryanAir. Le style de notre application a été inspirer du site officiel de la compagnie.
+		Nous avons choisi comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appeler BryanAir. Le style de notre application a été inspirer du site officiel de la compagnie.
 
 		Dans ce rapport, vous trouverez des explications sur le fonctionnement normal et erroné de l'application ainsi qu'un diagramme de séquence pour imager cela.
 
 
 	\section{Description du site}
-		Il y a tout d'abord une page d'accueil (figure~\ref{fig:home}) qui permet de se diriger vers une autre page afin de réserver un vol.
+		Il y a tout d'abord une page d'accueil (figure~\ref{fig:home}) qui permet de se diriger vers la page de réservation.
 		\begin{figure}
 			%\includegraphics[scale=1]{}
 			\caption{Page d'accueil}
 			\label{fig:home}
 		\end{figure}
 
-		Sur la première page de réservation (figure~\ref{fig:res1}), on peut réserver un ou plusieurs billets d'avion. Il faut donner l'aéroport de départ et d'arrivée, si on veut un aller simple ou un aller retour, le nombre de passager(s), son adresse email et si on désire une assurance annulation ou pas.
+		Sur la première page de réservation (figure~\ref{fig:res1}), on peut réserver un ou plusieurs billets d'avion. Il faut sélectionner l'aéroport de départ et d'arrivée, si on veut un aller simple ou un aller retour, le nombre de passager(s), son adresse email et si on désire une assurance annulation.
 		\begin{figure}
 			\caption{Réservation étape 1}
 			\label{fig:res1}
 		\end{figure}
 
-		La deuxième étape de réservation (figure~\ref{fig:res2}) consiste à enregistrer les informations pour chaque passager tel que le nom, le prénom et l'age.
+		La deuxième étape de réservation (figure~\ref{fig:res2}) consiste à enregistrer les informations pour chaque passager telles que le nom, le prénom et l'age.
 		\begin{figure}
 			\caption{Réservation étape 2}
 			\label{fig:res2}
 		\end{figure}
 
-		Une fois tous les passagers enregistrés, on arrive sur une page de confirmation (figure~\ref{fig:conf}) ou vous avez le choix de confirmer ou d'annuler.
+		Une fois tous les passagers enregistrés, on arrive sur la page de confirmation (figure~\ref{fig:conf}) où vous avez le choix de confirmer ou d'annuler la réservation.
 
 		\begin{figure}
 			\caption{Confirmation}
@@ -112,38 +112,39 @@ morecomment=[l]{//},}
 		\end{figure}
 
 	\section{Fonctionnement}
-		Dans cette section, vous retrouvez les explications sur le fonctionnement des différentes parties de l'application, tels que la redirection d'URL, les réservations, la page d'administration et les templates html.
+		Dans cette section, vous retrouvez les explications sur le fonctionnement des différentes parties de l'application, telles que la redirection d'URL, les réservations, la page d'administration et les templates html.
 		\subsection*{Redirection}
-		La conception de l'application est basé sur le design pattern MVC. Nous avons donc un routeur, des modèles, des contrôleurs et des views. Le routeur redirige vers le contrôleur adéquat qui va vérifier les informations venant des formulaires, charger et enregistrer les modèles dans la base de donnée. Le contrôleur va ensuite afficher la page.
+		La conception de l'application est basé sur le design pattern MVC. Nous avons donc un routeur, des modèles, des contrôleurs et des vues. Le routeur redirige vers le contrôleur adéquat qui va vérifier les informations venant des formulaires, charger et enregistrer les modèles dans la base de données. Le contrôleur va ensuite afficher la page souhaitée.
 
-		Lorsque qu'on veux accéder à une page, il suffit d'utiliser l'URL suivante \url{localhost/BryanAir/} suivit du nom de la page désirée. Cette URL est redirigée vers \url{localhost/Bryanair?page=<nom_de_page>} car le routeur a besoin d'une variable \texttt{GET["page"]} pour pouvoir rediriger vers le bon controleur. Nous avons fait ce choix pour qu'il soit plus facile d'accéder aux différentes pages de l'application. Cette redirection est configurée dans le fichier \texttt{.htacces}.
+		Lorsque qu'on veut accéder à une page, il suffit d'utiliser l'URL suivante \url{localhost/BryanAir/} suivit du nom de la page désirée. Cette URL est redirigée vers \url{localhost/Bryanair?page=<nom_de_page>} car le routeur a besoin d'une variable \texttt{GET["page"]} pour pouvoir rediriger vers le contrôleur adéquat. Nous avons fait ce choix pour qu'il soit plus facile d'accéder aux différentes pages de l'application. Cette redirection est configurée dans le fichier \texttt{.htacces}.
 
 		\subsection*{Templates}
-		Pour faciliter la construction des vues, nous avons utilisé un sytème de templates html. Nous avons placé des balises comme suit \texttt{\$balise\$} dans nos pages html. Celles-ci vont être remplacées par le contrôleur. La fonction \texttt{buildHTML} dans le fichier \texttt{utils.php} construit d'abord la page en concaténant quatres fichiers HTML. Trois de ces fichier sont communs pour toutes les vues, il y a le \texttt{head.html}, le \texttt{header.html} et le \texttt{footer.html}.  Entre ces deux derniers, la vue propre de chaque page est ajoutée.
-		On remplace ensuite toutes les balises, grâce aux expressions régulières (regex), par des bouts d'HTML construits via le contrôleur de chaque page. Cette fonction prend en paramètre un liste de clefs/valeurs, les clefs correspondent aux mots dans les balises de l'HTML et les valeurs contiennent donc le contenu à remplacer.
+		Pour faciliter la construction des vues, nous avons utilisé un sytème de templates html. Nous avons placé des balises comme suit \texttt{\$balise\$} dans nos pages html. Celles-ci vont être remplacées par le contrôleur. La fonction \texttt{buildHTML} dans le fichier \texttt{utils.php} construit d'abord la page en concaténant quatres fichiers HTML. Trois de ces fichier sont communs à toutes les vues, il y a le \texttt{head.html}, le \texttt{header.html} et le \texttt{footer.html}. Entre ces deux derniers, la vue propre de chaque page est ajoutée.
+		
+		On remplace ensuite toutes les balises, grâce aux expressions régulières (regex), par des bouts d'HTML construits via le contrôleur de chaque page. Cette fonction prend en paramètre une liste de clefs/valeurs, les clefs correspondent aux mots dans les balises de l'HTML et les valeurs contiennent donc le contenu à remplacer.
 
 		Cette méthode permet de faciliter grandement la création des vues. En effet, il ne sera pas nécésaire de copier dans tous les fichiers html un bout de code commun à toutes les pages. Cette méthode permet aussi de bien séparer la partie vue de la partie contrôleur.
 
 		\subsection{Réservation}
-      Tous d'abord, en cliquant sur le bouton réservation de la page d'acceuil, le contrôleur (controle\_reservation.php) charge la liste de tous les aéroports présents dans la base de donées. Le contrôleur va ensuite contruire la page de réservation grâce a cette liste.
+      Tous d'abord, en cliquant sur le bouton réservation de la page d'acceuil, le contrôleur (controle\_reservation.php) charge la liste de tous les aéroports présents dans la base de donées. Le contrôleur va ensuite contruire la page de réservation grâce à celle-ci.
 
-			Lorsque l'utilisateur valide la première page de réservation (figure~\ref{fig:res1}), un contrôleur (controleur\_detail.php) vérifie tout d'abord les données venant du \texttt{POST}. En effet si on passe bien par le formulaire, il ne devrait pas avoir de problème mais on peut tout à fait utiliser un outil tel que curl pour envoyer n'importe quel requète POST au serveur ou tout simplement en changeant l'html dans l'inspecteur du navigateur, on peut envoyer du text au lieu d'un entier. Il faut donc bien vérifier que toutes les données du \texttt{POST} nécessaires au contrôleur ont bien été définies et que le type de chacune est correct. Par exemple, la variable contenant le nombre de passager(s) doit pouvoir ètre convertie en un entier. Si un problème survient dans la vérification des variables, vous êtes redirigés vers la page précédente avec un message d'erreur sur le haut de celle-ci (figure~\ref{fig:error}. Si la vérification est réussie, le contrôleur cherche dans la base de données les numéros de vols (aller/retour) et le nombre de places restantes. S'il n'y a plus de place pour un des vols ou qu'il ne trouve pas de vol pour les aéroports sélectionnés, on aura un message d'erreur comme décrit précédement. Toutes ces informations sont utilisées pour instancier un objet de type \texttt{Reservation} et en définir l'état. Le contrôleur va ensuite construire la page HTML (detail.html) grâce à la fonction expliquée dans les sections précédentes.
+			Lorsque l'utilisateur valide la première page de réservation (figure~\ref{fig:res1}), un contrôleur (controleur\_detail.php) vérifie tout d'abord les données venant du \texttt{POST}. En effet si on passe bien par le formulaire, il ne devrait pas y avoir de problème mais on peut tout à fait utiliser un outil tel que curl pour envoyer n'importe quelle requète POST au serveur ou tout simplement en changeant l'html dans l'inspecteur du navigateur, on peut envoyer du text au lieu d'un entier. Il faut donc bien vérifier que toutes les données du \texttt{POST} nécessaires au contrôleur ont bien été définies et que le type de chacune est correct. Par exemple, la variable contenant le nombre de passager(s) doit pouvoir ètre convertie en un entier. Si un problème survient dans la vérification des variables, vous êtes redirigés vers la page précédente avec un message d'erreur sur le haut de celle-ci (figure~\ref{fig:error}. Si la vérification est réussie, le contrôleur cherche dans la base de données les numéros de vols (aller/retour) et le nombre de places restantes. S'il n'y a plus assez de places pour un des vols ou si le contrôleur ne trouve pas de vol pour les aéroports sélectionnés, on aura un message d'erreur comme décrit précédement. Toutes ces informations sont utilisées pour instancier un objet de type \texttt{Reservation} et en définir l'état. Le contrôleur va ensuite construire la page HTML (detail.html) grâce à la fonction expliquée dans les sections précédentes.
 			\begin{figure}
 				\caption{Message d'erreur}
 				\label{fig:error}
 			\end{figure}
 
 
-			Nous sommes maintenant arrivés à la deuxième étape de la réservation (figure~\ref{fig:res2}) où il faut encoder une à une les informations sur les passagers. Comme pour la première étape, un contrôleur (controleur\_nextpassenger.php) vérifie les informations de la variable \texttt{HTTP POST}, le même système d'erreur est aussi d'application. Une fois la vérification passée, le contrôleur instancie un objet de type \texttt{Client} dont l'état est défini par les informations entrées dans le formulaire. Cet objet client est ensuite ajouter dans la liste de clients de l'objet réservation. S'il y a encore des passagers à enregistrer, le contrôleur contruit la même page html que précédemment pour enregistrer un nouveau passager. Si tous les passagers sont enregistrés, le contrôleur construit la page de confirmation (confirmation.html).
+			Nous sommes maintenant arrivés à la deuxième étape de la réservation (figure~\ref{fig:res2}) où il faut encoder une à une les informations sur les passagers. Comme pour la première étape, un contrôleur (controleur\_nextpassenger.php) vérifie les informations de la variable \texttt{HTTP POST}, le système d'erreur reste d'application. Une fois la vérification passée, le contrôleur instancie un objet de type \texttt{Client} dont l'état est défini par les informations entrées dans le formulaire. Cet objet client est ensuite ajouter dans la liste de clients de l'objet réservation. S'il y a encore des passagers à enregistrer, le contrôleur contruit la même page html que précédemment pour enregistrer un nouveau passager. Si tous les passagers sont enregistrés, le contrôleur construit la page de confirmation (confirmation.html).
 
-			Une fois arrivé sur la page de confirmation (figure~\ref{fig:conf}), on a le choix entre confirmer la réservation ou l'annuler. Si la réservation est annulée, on est redirigé vers la page d'accueil et l'objet réservation avec la liste des clients est supprimé. Si on confirme la réservation, un contrôleur (controleur\_confirmation.php) vérifie si au moins un des passagers est bien majeur. Si ce n'est pas le cas, le système d'erreur affiche un message (figure~\ref{fig:ageError}), il faudra ré-encoder les informations des passagers. S'il y a bien au moins une personne majeur, le contrôleur enregistre les clients et la réservation dans la base de données et va ensuite nous rediriger vers une page résumant la réservation(figure~\ref{fig:recap}).
+			Une fois arrivé sur la page de confirmation (figure~\ref{fig:conf}), on a le choix entre confirmer ou annuler la réservation en cours. Si la réservation est annulée, on est redirigé vers la page d'accueil et l'objet réservation avec la liste des clients est supprimé. Si on confirme la réservation, un contrôleur (controleur\_confirmation.php) vérifie si au moins un des passagers est bien majeur. Si ce n'est pas le cas, le système d'erreur affiche un message (figure~\ref{fig:ageError}), il faudra réencoder les informations des passagers. S'il y a bien au moins une personne majeure, le contrôleur enregistre les clients et la réservation dans la base de données et va ensuite nous rediriger vers une page résumant la réservation(figure~\ref{fig:recap}).
 
 			\begin{figure}
 				\caption{Erreur de majorité}
 				\label{fig:ageError}
 			\end{figure}
 
-			Le contrôleur (controleur\_resumer.php) permettant d'afficher cette page va tout d'abord construire un tableau html, avec tous les passagers  de la réservation, grâce à l'objet réservation. Cet objet se charge aussi de calculer le prix total à payer en se basant sur le nombre de passagers, s'ils ont pris un vol aller retour ou aller simple et enfin, si une assurance annulation est prise. Le contrôleur va ensuite construire la page avec toutes ces informations.
+			Le contrôleur (controleur\_resumer.php) permettant d'afficher cette page va tout d'abord construire un tableau html, avec tous les passagers  de la réservation, grâce à l'objet réservation. Cet objet se charge aussi de calculer le prix total à payer en se basant sur le nombre de passagers, s'ils ont pris un vol aller retour ou aller simple et enfin, si une assurance annulation est contractée. Le contrôleur va ensuite construire la page avec toutes ces informations.
 
 		\subsection{Admin}
 			En allant sur la page admin, le contrôleur (controler\_admin.php) charge depuis la base de données tous les vols ainsi que les passagers pour chacun d'entre eux. Il en fait un tableau html représantant toutes ces données puis construit la page html (admin.html).
@@ -151,11 +152,13 @@ morecomment=[l]{//},}
 	\section*{Conclusion}
 			Nous pensons avoir respecté toutes les consignes dans le développement de cette application web (au moins toutes les pages demandées, la gestion des erreurs, une feuille de style externe, ...).
 
-			Nous avons fait quelques efforts concernant le style de l'application en utilisant Bootstrap pour les différents boutons, les formulaires, le tableau de la page administrateur, ... Quelques efforts ont également été apportés pour s'approcher le plus possible du site de Ryanair comme le logo ou encore le nom tous les deux réalisés en svg.
+			Nous avons fait quelques efforts concernant le style de l'application en utilisant Bootstrap pour les différents boutons, les formulaires, les tableaux, ... Quelques efforts ont également été apportés pour s'approcher le plus possible du site de Ryanair comme le logo et l'icône tous les deux réaliser sous format vectoriel.
 
-			Cependant, nous pouvons évidemment penser à de possibles améliorations pour rendre l'application plus agréable à utiliser. Premièrement, ne pas devoir réencoder toutes les données quand on revient sur la page réservation depuis la page details ou encore les données des passagers si au moins un d'entre eux n'est pas majeur. Ensuite, nous pourrions penser à pouvoir modifier également la prise de l'assurance annulation sur la page administrateur. Cette liste n'est pas exhaustive.
+      Nous avons intégré une page error 404 pour les erreurs éponymes c'est à dire si l'on cherche une page qui n'existe pas sur BryanAir. Il y a également la possibilité de retourner à la page d'accueil depuis n'importe quelle page en cliquant sur le le logo présent dans le coin supérieur gauche de toutes les pages.
 
-			Ce travail nous a apporté une meilleur connaissance du développement web et plus particulièrement du protocole MVC, de la création d'une base de données Mysql et de son utilisation dans un programme informatique.
+			Cependant, nous pouvons penser à de possibles améliorations pour rendre l'application plus agréable à utiliser. Premièrement, ne pas devoir réencoder toutes les données des passagers quand on revient sur la page réservation depuis la page details ou si au moins un des passagers n'est pas majeur. Ensuite, nous pourrions penser à permettre la modification de l'état de l'assurance annulation depuis la page admin. Cette fonctionnalité n'est pas possible pour le moment à cause de la structure de la base de données. Pour terminer, nous aurions pu mettre le résumer de la réservation sur la page de confirmation pour confirmer avec les informations sous les yeux.
+
+			Ce travail nous a apporté une meilleur connaissance du développement web et plus particulièrement du modéle de développement MVC. Nous avons également pu nous familiariser avec la création et la manipulation d'une base de données Mysql.
 \pagebreak
   \appendix
   \section{Modèles}
