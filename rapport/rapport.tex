@@ -76,7 +76,7 @@ morecomment=[l]{//},}
 
 		Nous avons choisi comme idée de réaliser une caricature de la compagnie aérienne Ryanair, que nous avons appelée BryanAir. Le style de notre application a été inspiré du site officiel de la compagnie.
 
-		Dans ce rapport se trouve un desctiption du site et des explications sur le fonctionnement normal et erroné de l'application, ainsi qu'un diagramme de séquence pour illustrer cela.
+		Dans ce rapport se trouve une description du site et des explications sur le fonctionnement normal et erroné de l'application, ainsi qu'un diagramme de séquence pour illustrer cela.
 
 
 	\section{Description du site}
@@ -124,11 +124,11 @@ morecomment=[l]{//},}
 		\end{figure}
 
 	\section{Fonctionnement}
-		Cette section fournit les explications sur le fonctionnement des différentes parties de l'application, telles que le route, les templates HTML, le fonctionnement des réservations et l'interface d'adminis\-tration.
+		Cette section fournit les explications sur le fonctionnement des différentes parties de l'application, telles que le routage, les templates HTML, le fonctionnement des réservations et l'interface d'adminis\-tration.
 		\subsection{Routage}
-		L'application est basée sur le design pattern MVC. Nous avons donc un routeur, des modèles, des contrôleurs et des vues. Le routeur redirige les requêtes vers le contrôleur adéquat grâce à une variable HTTP \texttt{GET}. ce contrôleur vérifie les informations venant des formulaires, les charge et les enregistre dans la base de données, et génère la page correspondante.
+		L'application est basée sur le design pattern MVC. Nous avons donc un routeur, des modèles, des contrôleurs et des vues. Le routeur redirige les requêtes vers le contrôleur adéquat grâce à une variable HTTP \texttt{GET}. Ce contrôleur vérifie les informations venant des formulaires, les charge et les enregistre dans la base de données, et génère la page correspondante.
 
-		L'accès à une page se fait via l'URL suivante \url{http://localhost/BryanAir/<nom_de_page>}. Elle est réécrite en \url{http://localhost/Bryanair?page=<nom_de_page>} pour que le routeur puisse rediriger vers le bon contrôleur. Nous avons fait ce choix pour que les différentes URLs soient plus simples. Cette réécriture se fait par Apache grâce à une configuration dans le fichier \texttt{.htaccess} (Annexe~\ref{ann:other})et elle est mise en place grâce a des regex.
+		L'accès à une page se fait via l'URL suivante \url{http://localhost/BryanAir/<nom_de_page>}. Elle est réécrite en \url{http://localhost/Bryanair?page=<nom_de_page>} pour que le routeur puisse rediriger vers le bon contrôleur. Nous avons fait ce choix pour que les différentes URLs soient plus simples. Cette réécriture se fait par Apache grâce à une configuration dans le fichier \texttt{.htaccess} (annexe~\ref{ann:other})et elle est mise en place grâce a des regex.
 
 		\subsection{Templates}
 		Pour faciliter la construction des vues, nous avons utilisé un sytème de templates HTML. Nous avons placé des balises de la forme \texttt{\$balise\$}, dans nos pages HTML, que le contrôleur remplace par des valeurs.
@@ -136,19 +136,19 @@ morecomment=[l]{//},}
     La fonction \texttt{buildHTML} du fichier \texttt{utils.php} (annexe~\ref{ann:other}) construit d'abord la vue en concaté\-nant quatres fichiers HTML:
     \begin{itemize}
       \item Trois de ces fichiers sont communs à toutes les vues: \texttt{head.html}, \texttt{header.html} et \texttt{footer.html} (annexe~\ref{ann:tmp}).
-      \item Le contenu propre spécifique de la vue est ajouter entre le header et le footer.
+      \item Le contenu propre spécifique de la vue est ajouté entre le header et le footer.
     \end{itemize}
 
-		La fonction remplace ensuite chaque balise par une valeur (simple texte, bout d'HTML...) construite par le contrôleur. Pour cela, elle prend en paramètre une liste de paires clè/valeur, les clès correspondant aux balises et les valeurs contenant la chaine de caractères de remplacement.
+		La fonction remplace ensuite chaque balise par une valeur (simple texte, bout d'HTML...) construite par le contrôleur. Pour cela, elle prend en paramètre une liste de paires clé/valeur, les clés correspondant aux balises et les valeurs contenant la chaine de caractères de remplacement.
 
-		Cette méthode facilite la création des vues. En effet, il n'est plus nécessaires de copier dans tous les fichiers HTML des bouts de code communs. Cette méthode permet aussi de bien séparer la partie statique (HTML pur) des vues de la partie dynamique (en PHP) gérée par le contrôleur.
+		Cette méthode facilite la création des vues. En effet, il n'est plus nécessaire de copier dans tous les fichiers HTML des bouts de code communs. Cette méthode permet aussi de bien séparer la partie statique (HTML pur) des vues de la partie dynamique (en PHP) gérée par le contrôleur.
 
 		\subsection{Réservation}
       Lorsque l'on effectue une réservation, le contrôleur dédié \texttt{controler\_reservation.php} (annexe~\ref{ann:ctr}) charge la liste de tous les aéroports présents dans la table \texttt{airport} de la base de données. Grâce à cette liste, il construit ensuite, comme expliqué à la section précédente, la vue initiale de la réservation.
 
-			Lorsque l'utilisateur valide la première page de réservation (figure~\ref{fig:res1}), le contrôleur \linebreak[4] \texttt{controleur\_detail.php} vérifie tout d'abord certaines des valeurs transmises par la variable HTTP \texttt{POST}. Il faut donc bien vérifier que toutes les données transmises nécessaires au contrôleur ont bien été définies et que le type de chacune est correct. Par exemple, la variable contenant le nombre de passagers doit pouvoir être convertie en un entier. Il est important que cette vérification se fasse du coté serveur. En effet, l'utilisateur passe bien par le formulaire, il ne devrait pas y avoir de problèmes. Mais une personne mal intentionnée peut tout à fait utiliser un outil tel que cURL pour envoyer n'importe quelle requête POST au serveur ou même changer l'HTML dans l'inspecteur du navigateur pour les contraintes des champs du formulaires.
+			Lorsque l'utilisateur valide la première page de réservation (figure~\ref{fig:res1}), le contrôleur \linebreak[4] \texttt{controleur\_detail.php} vérifie tout d'abord certaines des valeurs transmises par la variable HTTP \texttt{POST}. Il faut donc bien vérifier que toutes les données transmises nécessaires au contrôleur ont bien été définies et que le type de chacune est correct. Par exemple, la variable contenant le nombre de passagers doit pouvoir être convertie en un entier. Il est important que cette vérification se fasse du coté serveur. En effet, si l'utilisateur passe bien par le formulaire, il ne devrait pas y avoir de problèmes. Mais une personne mal intentionnée peut tout à fait utiliser un outil tel que cURL pour envoyer n'importe quelle requête POST au serveur ou même changer l'HTML dans l'inspecteur du navigateur pour les contraintes des champs du formulaire.
 
-      Si un problème survient dans la vérification des données, L'utilisateur reste sur le formulaire et reçoit un message d'erreur afficher en haute de celui-ci (figure~\ref{fig:error}. Sinon, le contrôleur cherche dans la base de données les numéros de vols (aller/retour) et le nombre de places restantes. S'il n'y a plus de place pour le vol aller ou retour, ou qu'il ne trouve pas de vol pour les aéroports sélectionnés,  un message d'erreur apparait également.
+      Si un problème survient dans la vérification des données, L'utilisateur reste sur le formulaire et reçoit un message d'erreur affiché en haut de celui-ci (figure~\ref{fig:error}). Sinon, le contrôleur cherche dans la base de données les numéros de vols (aller/retour) et le nombre de places restantes. S'il n'y a plus de place pour le vol aller ou retour, ou qu'il ne trouve pas de vol pour les aéroports sélectionnés,  un message d'erreur apparait également.
 
 
       Pour terminer, le contrôleur instancie un objet de type \texttt{Reservation} ainsi que deux objets \texttt{Flight} avec toutes les informations précédemment récoltées. Il construit ensuite la page HTML \texttt{detail.html} (annexe~\ref{ann:tmp}) permetant d'encoder les données passagers.
@@ -169,10 +169,10 @@ morecomment=[l]{//},}
 				\label{fig:ageError}
 			\end{figure}
 
-			S'il y a bien au moins une personne majeure, le contrôleur enregistre les clients ainsi que leur réservation (une par client) dans la base de données et redirige vers une page résumant la réservation (figure~\ref{fig:recap}). Le contrôleur \texttt{controler\_resumer.php} (annexe~\ref{ann:ctr}) prend le relais et va tout d'abord construire un tableau HTML, avec tous les clients contenu dans la réservation. L'objet \texttt{Reservation} se charge aussi de calculer le prix total à payer en se basant sur le nombre de passagers, s'ils ont pris un vol aller-retour ou aller simple et enfin, si une assurance annulation à été prise.
+			S'il y a bien au moins une personne majeure, le contrôleur enregistre les clients ainsi que leur réservation (une par client) dans la base de données et redirige vers une page résumant la réservation (figure~\ref{fig:recap}). Le contrôleur \texttt{controler\_resumer.php} (annexe~\ref{ann:ctr}) prend le relais et va tout d'abord construire un tableau HTML, avec tous les clients contenu dans la réservation. L'objet \texttt{Reservation} se charge aussi de calculer le prix total à payer en se basant sur le nombre de passagers, s'ils ont pris un vol aller-retour ou aller simple et enfin, si une assurance annulation à été prise. Un scénario détailé d'une réservation se trouve a l'annexe~\ref{ann:diag}.
 
 		\subsection{Admin}
-			La page admin est gérée par le contrôleur \texttt{controler\_admin.php} (annexe~\ref{ann:ctr}) qui charge depuis la base de données tous les vols ainsi que tous les passagers pour chacun d'entre eux. Il en fait un tableau HTML représentant toutes ces données puis construit la vue \texttt{admin.html} (annexe~\ref{ann:tmp}).
+			La page admin est gérée par le contrôleur \texttt{controler\_admin.php} (annexe~\ref{ann:ctr}) qui charge depuis la base de données tous les vols ainsi que tous les passagers pour chacun d'entre eux. Il en fait un tableau HTML représentant toutes ces données puis construit la vue \texttt{admin.html} (annexe~\ref{ann:tmp}). Un scénario d'accès à l'espace admin se trouve a l'annexe~\ref{ann:diag}.
 
 	\section*{Conclusion}
       Ce travail nous a apporté une meilleure connaissance du développement web, et plus particulière\-ment du modéle MVC, de la création d'une base de données Mysql et du développement PHP.
@@ -181,7 +181,7 @@ morecomment=[l]{//},}
 
       Nous avons intégré une page error 404 personalisée pour les requêtes de pages qui n'existent pas sur BryanAir. Il y a également la possibilité de retourner sur la page d'accueil depuis n'importe quelle page en cliquant sur le logo présent dans le coin supérieur gauche de toutes les pages.
 
-			Cependant, des améliorations sont possible pour rendre l'application plus agréable à utiliser. Premièrement, ne pas devoir réencoder toutes les données des passagers en cas d'erreur. Pour terminer, nous aurions pu mettre le résumé de la réservation sur la page de confirmation pour que l'utilisateur ait les détails sous les yeux avant de confirmer.
+			Cependant, des améliorations sont possibles pour rendre l'application plus agréable à utiliser. Premièrement, ne pas devoir réencoder toutes les données des passagers en cas d'erreur. Pour terminer, nous aurions pu mettre le résumé de la réservation sur la page de confirmation pour que l'utilisateur ait les détails sous les yeux avant de confirmer.
 
 \pagebreak
   \appendix
@@ -245,4 +245,10 @@ morecomment=[l]{//},}
   \lstinputlisting[language=php]{\file{utils.php}}
   \subsection{style.css}
   \lstinputlisting[language=css]{\file{ressources/CSS/style.css}}
+
+\section{Diagramme de séquence \label{ann:diag}}
+  \subsection{Réservation}
+  \includegraphics[width=\textwidth]{reservationDiagram}
+  \subsection{Admin}
+  \includegraphics[width=\textwidth]{adminDiagram}
 \end{document}
